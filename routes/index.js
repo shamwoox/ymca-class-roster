@@ -24,7 +24,8 @@ router.post('/register', function(req, res) {
         phone: req.body.phone,
         username: req.body.username,
     });
-    if(req.body.adminCode == process.env.ADMIN_CODE) {
+    if(req.body.adminCode == process.env.YMCA_ADMIN_CODE) {
+        console.log(process.env.YMCA_ADMIN_CODE);
         newUser.isAdmin = true;
     }
     User.register(newUser, req.body.password, function(err, user) {
