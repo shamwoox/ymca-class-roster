@@ -29,9 +29,9 @@ router.post('/register', function(req, res) {
         newUser.isAdmin = true;
     }
     User.register(newUser, req.body.password, function(err, user) {
-        if(err) {
+        if(err || req.body.confirm_password != req.body.password) {
             console.log(err.message);
-            res.redirect('/login');
+            res.redirect('/register');
         }
         passport.authenticate('local')(req, res, function() {
             res.redirect('/');

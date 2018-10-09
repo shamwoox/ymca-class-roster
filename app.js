@@ -2,7 +2,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose')
     passport = require('passport'),
-    LocalStrategy = require("passport-local")
+    LocalStrategy = require("passport-local"),
+    methodOverride = require('method-override'),
     User = require('./models/user');
 
 mongoose.connect('mongodb://localhost/ymca', { useNewUrlParser: true });
@@ -11,6 +12,7 @@ var app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride('_method'));
 
 app.use(require("express-session") ({
     secret: "I really love corgis",

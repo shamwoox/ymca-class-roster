@@ -3,6 +3,7 @@
 <br>
 <div class="container">
 	<h1><i class="far fa-address-card"></i> User Profile</h1>
+	<hr>
   <div class="card bg-light mb-3" style="max-width: 18rem;">
     <div class="card-header"><%= user.firstName %> <%= user.lastName %></div>
     	<div class="card-body">
@@ -15,7 +16,7 @@
 				<% } else { %>
 				<p class="card-text"><i class="fas fa-lock-open"></i> Account Type: Instructor</p>
 				<% } %>
-				
+				<a href="/user/<%= user._id %>/edit" class="btn btn-warning btn-sm">Edit Info <i class="far fa-edit"></i></a>
       </div>
   </div>
 </div>
