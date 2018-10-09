@@ -2,17 +2,18 @@
 
 <br>
 <div class="container">
-	<h1>User Profile</h1>
+	<h1><i class="far fa-address-card"></i> User Profile</h1>
   <div class="card bg-light mb-3" style="max-width: 18rem;">
     <div class="card-header"><%= user.firstName %> <%= user.lastName %></div>
     	<div class="card-body">
-        <h5 class="card-title"><Light card title>Personal Information</h5>
-				<p class="card-text">Email: <%= user.email %></p>
-				<p class="card-text">Phone: <%= user.phone %></p>
+				<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
+				<hr>
+				<p class="card-text"><i class="fas fa-envelope"></i> Email: <%= user.email %></p>
+				<p class="card-text"><i class="fas fa-phone"></i> Phone: <%= user.phone %></p>
 				<% if(user.isAdmin) { %>
-				<p class="card-text">Account Type: Manager</p>
+				<p class="card-text"><i class="fas fa-lock"></i> Account Type: Manager</p>
 				<% } else { %>
-				<p class="card-text">Account Type: Instructor</p>
+				<p class="card-text"><i class="fas fa-lock-open"></i> Account Type: Instructor</p>
 				<% } %>
 				
       </div>
