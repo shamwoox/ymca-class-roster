@@ -4,6 +4,11 @@
 <div class="container">
 	<h1><i class="far fa-address-card"></i> User Profile</h1>
 	<hr>
+	<% if(success && success.length > 0) { %>
+		<div class="alert alert-success" role="alert">
+			<%= success %>
+		</div>
+	<% } %>
   <div class="card bg-light mb-3" style="max-width: 18rem;">
     <div class="card-header"><%= user.firstName %> <%= user.lastName %></div>
     	<div class="card-body">

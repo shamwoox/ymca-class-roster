@@ -12,6 +12,11 @@
               <%= success %>
             </div>
           <% } %>
+          <% if(error && error.length > 0) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= error %>
+            </div>
+          <% } %>
           <div class="form-group">
             <label for="username">Username</label>
             <input name="username" type="text" class="form-control" id="email" placeholder="Username">

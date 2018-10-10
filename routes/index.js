@@ -2,6 +2,7 @@ var express = require('express'),
     passport = require('passport'),
     User = require('../models/user'),
     middleware = require('../middleware/index'),
+    formatFunctions = require('../public/main'),
     router = express.Router();
 
 router.get('/', middleware.isLoggedIn, function(req, res) {
@@ -22,7 +23,7 @@ router.post('/register', function(req, res) {
         firstName: req.body.first_name,
         lastName: req.body.last_name,
         email: req.body.email,
-        phone: formatPhoneNumber(req.body.phone),
+        phone: formatFunctions.formatPhoneNumber(req.body.phone),
         username: req.body.username,
     });
     if(req.body.adminCode == process.env.YMCA_ADMIN_CODE) {
@@ -44,9 +45,11 @@ router.post('/register', function(req, res) {
 //handling login logic
 router.post("/login", passport.authenticate("local", 
 {
-    successRedirect: "/",
-    failureRedirect: "/login"
+    failureRedirect: "/login",
+    failureFlash: true,
 }),function(req, res) {
+    req.flash('success', 'Welcome back!');
+    res.redirect('/');
 });
 
 router.get('/logout', function(req, res) {
@@ -54,15 +57,5 @@ router.get('/logout', function(req, res) {
     req.flash('success', 'You have successfully logged out!');
     res.redirect('/login');
 });
-
-function formatPhoneNumber(phoneNumberString) {
-    var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
-    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-    if (match) {
-      var intlCode = (match[1] ? '+1 ' : '')
-      return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
-    }
-    return null
-}
 
 module.exports = router;

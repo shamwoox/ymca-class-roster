@@ -1,6 +1,7 @@
 var express = require('express'),
     User = require('../models/user'),
     middleware = require('../middleware/index'),
+    formatFunctions = require('../public/main');
     router = express.Router();
 
 //Show more information about a user
@@ -27,10 +28,13 @@ router.get('/:id/edit',function(req, res) {
 });
 
 router.put('/:id', function(req, res) {
-    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser) {
+    var user = req.body.user;
+    user.phone = formatFunctions.formatPhoneNumber(user.phone);
+    User.findByIdAndUpdate(req.params.id, user, function(err, updatedUser) {
         if(err) {
             res.redirect('/user/' + req.params.id +'/edit');
         } else {
+            req.flash('success', 'Successfully updated user profile!');
             res.redirect('/user/' + req.params.id);
         }
     });
