@@ -1,9 +1,10 @@
 var express = require('express'),
     User = require('../models/user'),
+    middleware = require('../middleware/index'),
     router = express.Router();
 
 //Show more information about a user
-router.get('/:id', function(req, res) {
+router.get('/:id', middleware.isLoggedIn, function(req, res) {
     User.findById(req.params.id).exec(function(err, foundUser) {
         if(err || !foundUser){
             res.send("User not found");

@@ -1,6 +1,6 @@
 <% include ./partials/header %>
 
-<div class="container-fluid">
+<div class="container">
   <div class="form">
     <div class="row">
       <div class="shadow-lg p-3 mb-5 bg-white rounded">
@@ -9,6 +9,11 @@
 					<hr>
 					<small class="form-text text-muted text-center">We won't share any of your personal information</small>
 					<br>
+					<% if(error && error.length > 0) { %>
+						<div class="alert alert-danger" role="alert">
+              <%= error %>
+            </div>
+					<% } %>
 					<div class="form-row">
 						<div class="form-group col-md-12">
 							<label for="username">*Username</label>
@@ -36,13 +41,9 @@
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-12">
 							<label for="password">*Password</label>
 							<input type="password" name="password" class="form-control" id="password" required>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="confirm_password">*Confirm Password</label>
-							<input type="password" name="confirm_password" class="form-control" id="confirm_password" required>
 						</div>
 					</div>
 					<div class="form-row">

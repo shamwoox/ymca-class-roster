@@ -4,7 +4,8 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require("passport-local"),
     methodOverride = require('method-override'),
-    User = require('./models/user');
+    User = require('./models/user'),
+    flash = require('connect-flash');
 
 mongoose.connect('mongodb://localhost/ymca', { useNewUrlParser: true });
 
@@ -19,11 +20,13 @@ app.use(require("express-session") ({
     resave: false,
     saveUninitialized: false
 }));
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     next();
 });
 
