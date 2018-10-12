@@ -2,7 +2,7 @@ var express = require('express'),
     passport = require('passport'),
     User = require('../models/user'),
     middleware = require('../middleware/index'),
-    formatFunctions = require('../public/main'),
+    myFunctions = require('../public/main'),
     router = express.Router();
 
 router.get('/', middleware.isLoggedIn, function(req, res) {
@@ -23,7 +23,7 @@ router.post('/register', function(req, res) {
         firstName: req.body.first_name,
         lastName: req.body.last_name,
         email: req.body.email,
-        phone: formatFunctions.formatPhoneNumber(req.body.phone),
+        phone: myFunctions.formatPhoneNumber(req.body.phone),
         username: req.body.username,
     });
     if(req.body.adminCode == process.env.YMCA_ADMIN_CODE) {

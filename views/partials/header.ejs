@@ -21,24 +21,32 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-              </li>
+              <% if(currentUser) { %>
+                <li class="nav-item">
+                  <a class="nav-link" href="/"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                  <a class="nav-link" href="/user"><i class="fas fa-chalkboard-teacher"></i> Instructors</a>
+                </li>
+                <li>
+                  <a class="nav-link" href="#"><i class="fas fa-user-graduate"></i> Students</a>
+                </li>
+              <% } %>
             </ul>
             <ul class="navbar-nav">
               <% if(!currentUser) { %>
                 <li class="nav-item">
-                  <a class="nav-link" href="/login">Login</a>
+                  <a class="nav-link" href="/login">Login <i class="fas fa-sign-in-alt"></i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/register">Register</a>
+                  <a class="nav-link" href="/register">Register <i class="fas fa-user-plus"></i></a>
                 </li>
               <% } else { %>
               <li>
-                <a class="nav-link" href="/user/<%= currentUser._id %>">Signed in as <%= currentUser.firstName %></a>
+                <a class="nav-link" href="/user/<%= currentUser._id %>"><i class="fas fa-user-circle"></i> Signed in as <%= currentUser.firstName %></a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="/logout">Logout</a>
+                  <a class="nav-link" href="/logout">Logout <i class="fas fa-sign-out-alt"></i></a>
               </li>
               <% } %>
             </ul>

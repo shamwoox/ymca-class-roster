@@ -1,6 +1,6 @@
-var formatFunctions = {};
+var myFunctions = {};
 
-formatFunctions.formatPhoneNumber = function (phoneNumberString) {
+myFunctions.formatPhoneNumber = function (phoneNumberString) {
     var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
     var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
     if (match) {
@@ -10,4 +10,4 @@ formatFunctions.formatPhoneNumber = function (phoneNumberString) {
     return null
 }
 
-module.exports = formatFunctions;
+module.exports = myFunctions;

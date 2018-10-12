@@ -1,8 +1,19 @@
 var express = require('express'),
     User = require('../models/user'),
     middleware = require('../middleware/index'),
-    formatFunctions = require('../public/main');
+    myFunctions = require('../public/main');
     router = express.Router();
+
+//List all instructors
+router.get('/', middleware.isLoggedIn, function(req, res) {
+    User.find({isAdmin: false}, function(err, allInstructors) {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('user/index', {instructors: allInstructors});
+        }
+    });
+});
 
 //Show more information about a user
 router.get('/:id', middleware.isLoggedIn, function(req, res) {
@@ -10,7 +21,6 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
         if(err || !foundUser){
             res.send("User not found");
         } else {
-            console.log(foundUser)
             res.render("user/show", {user: foundUser});
         }
     });
@@ -29,7 +39,7 @@ router.get('/:id/edit',function(req, res) {
 
 router.put('/:id', function(req, res) {
     var user = req.body.user;
-    user.phone = formatFunctions.formatPhoneNumber(user.phone);
+    user.phone = myFunctions.formatPhoneNumber(user.phone);
     User.findByIdAndUpdate(req.params.id, user, function(err, updatedUser) {
         if(err) {
             res.redirect('/user/' + req.params.id +'/edit');

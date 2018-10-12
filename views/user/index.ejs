@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+
+<div class="container w-25">
+	<h2>Instructors</h2>
+	<p>Type instructor name:</p>  
+	<input class="form-control" id="myInput" type="text" placeholder="Search..">
+	<br>
+	<ul class="list-group" id="instructors">
+		<% instructors.forEach(function(instructor) { %>
+			<li class="list-group-item"><a href="/user/<%= instructor._id %>"><%= instructor.firstName %> <%= instructor.lastName %></a></li>
+		<% }) %>
+	</ul>  
+</div>
+	
+<script>
+	$(document).ready(function(){
+		$("#myInput").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#instructors li").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
+	});
+</script>
+
+<% include ../partials/footer %>
