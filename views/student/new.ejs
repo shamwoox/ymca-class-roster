@@ -1,0 +1,46 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="parent">
+      <div class="form">
+          <div class="row">
+              <div class="shadow-lg p-3 mb-5 bg-white rounded">
+								<form action="/students" method="POST">
+									<h2>New Student</h2>
+									<hr>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="firstName">First Name</label>
+											<input type="text" name="student_first_name" class="form-control" id="firstName" placeholder="Jane">
+										</div>
+										<div class="form-group col-md-6">
+											<label for="lastName">Last Name</label>
+											<input type="text" name="student_last_name" class="form-control" id="lastName" placeholder="Doe">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="age">Age</label>
+											<input type="number" name="student_age" class="form-control" id="age">
+										</div>
+										<div class="form-group col-md-6">
+											<label for="gender">Gender</label>
+											<select name="student_gender" class="form-control" id="gender">
+												<option>Select</option>
+												<option value="Male">Male</option>
+												<option value="Female">Female</option>
+												<option value="Other">Other</option>
+											</select>
+										</div>
+									</div>
+									<hr>
+									<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+									<a href="/students" class="btn btn-danger btn-sm">Cancel</a>
+								</form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<% include ../partials/footer %>

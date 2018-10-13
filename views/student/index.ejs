@@ -6,21 +6,22 @@
 			<%= success %>
 		</div>
 	<% } %>
-	<h2>Instructors</h2>
-	<p>Type instructor name:</p>  
+	<h2>Students</h2>
+	<p>Type student name:</p>  
 
 	<div class="input-group">
 		<input type="text" class="form-control" id="myInput">
 		<div class="input-group-append">
-			<span class="input-group-text"><i class="fas fa-search"></i></span>
-		</div>
+			<span class="input-group-text"><i class="fas fa-search"></i></span> 
+        </div>
+        <a href="/students/new" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></a>
 	</div>
 
 	<!-- <input class="form-control" id="myInput" type="text" placeholder="Search.."> -->
 	<br>
-	<ul class="list-group" id="instructors">
-		<% instructors.forEach(function(instructor) { %>
-			<li class="list-group-item"><a href="/user/<%= instructor._id %>"><%= instructor.firstName %> <%= instructor.lastName %></a></li>
+	<ul class="list-group" id="students">
+		<% students.forEach(function(student) { %>
+			<li class="list-group-item"><a href="/students/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a></li>
 		<% }) %>
 	</ul>  
 </div>
@@ -29,7 +30,7 @@
 	$(document).ready(function(){
 		$("#myInput").on("keyup", function() {
 			var value = $(this).val().toLowerCase();
-			$("#instructors li").filter(function() {
+			$("#students li").filter(function() {
 				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 			});
 		});

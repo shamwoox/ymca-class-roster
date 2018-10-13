@@ -22,9 +22,14 @@
 				<p class="card-text"><i class="fas fa-lock-open"></i> Account Type: Instructor</p>
 				<% } %>
 				<% if(currentUser && currentUser._id.equals(user._id) || currentUser && currentUser.isAdmin) { %>
-				<a href="/user/<%= user._id %>/edit" class="btn btn-warning btn-sm">Edit Info <i class="far fa-edit"></i></a>
+				<a href="/user/<%= user._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
 				<% } %>
-			</div>
+				<% if(currentUser && currentUser.isAdmin) { %>
+					<form class="inline" action="/user/<%= user._id %>?_method=DELETE" method="POST">
+						<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
+					</form>
+				<% } %>
+		</div>
   </div>
 </div>
 

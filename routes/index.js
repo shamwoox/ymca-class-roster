@@ -30,16 +30,21 @@ router.post('/register', function(req, res) {
         console.log(process.env.YMCA_ADMIN_CODE);
         newUser.isAdmin = true;
     }
-    User.register(newUser, req.body.password, function(err, user) {
-        if(err) {
-            req.flash('error', err.message);
-            res.redirect('/register');
-        }
-        passport.authenticate('local')(req, res, function() {
-            req.flash('success', 'Account successfully created! Welcome ' + req.body.first_name + " " +req.body.last_name);
-            res.redirect('/');
+    if(req.body.adminCode.length > 0 && req.body.adminCode != process.env.YMCA_ADMIN_CODE) {
+        req.flash('error', 'Incorrect admin code');
+        res.redirect('/register');
+    } else {
+        User.register(newUser, req.body.password, function(err, user) {
+            if(err) {
+                req.flash('error', err.message);
+                res.redirect('/register');
+            }
+            passport.authenticate('local')(req, res, function() {
+                req.flash('success', 'Account successfully created! Welcome ' + req.body.first_name + " " +req.body.last_name);
+                res.redirect('/');
+            });
         });
-    });
+    }
 });
 
 //handling login logic

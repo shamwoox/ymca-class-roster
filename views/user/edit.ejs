@@ -1,6 +1,7 @@
 <% include ../partials/header %>
 
 <div class="container-fluid">
+	<div class="parent">
   <div class="form">
     <div class="row">
       <div class="shadow-lg p-3 mb-5 bg-white rounded">
@@ -23,13 +24,14 @@
 					<div class="form-row">
 						
 					</div>
-					<button type="submit" class="btn btn-primary">Save</button>
-					<a href="/user/<%= user._id %>" class="btn btn-danger">Cancel</a>
+					<button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
+					<a href="/user/<%= user._id %>" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</a>
         	</div>
       	</form>
       </div>
     </div>
-  </div>
+	</div>
+</div>
 </div>
 
 <% include ../partials/footer %>

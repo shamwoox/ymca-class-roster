@@ -8,6 +8,7 @@ var express = require('express'),
     flash = require('connect-flash');
 
 mongoose.connect('mongodb://localhost/ymca', { useNewUrlParser: true });
+mongoose.set('useCreateIndex', true);
 
 var app = express();
 app.set('view engine', 'ejs');
@@ -36,8 +37,10 @@ passport.deserializeUser(User.deserializeUser());
 
 var indexRoutes = require('./routes/index');
 var userRoutes = require('./routes/user');
+var studentRoutes = require('./routes/student');
 app.use("/", indexRoutes);
 app.use("/user/", userRoutes);
+app.use("/students/", studentRoutes);
 
 app.listen('5000', function() {
     console.log('Server running on port 5000');

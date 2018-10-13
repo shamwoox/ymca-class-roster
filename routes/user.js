@@ -37,6 +37,7 @@ router.get('/:id/edit',function(req, res) {
     });
 });
 
+//UPDATE user
 router.put('/:id', function(req, res) {
     var user = req.body.user;
     user.phone = myFunctions.formatPhoneNumber(user.phone);
@@ -46,6 +47,18 @@ router.put('/:id', function(req, res) {
         } else {
             req.flash('success', 'Successfully updated user profile!');
             res.redirect('/user/' + req.params.id);
+        }
+    });
+});
+
+//Destroy user
+router.delete('/:id', function(req, res) {
+    User.findByIdAndRemove(req.params.id, function(err) {
+        if(err) {
+            res.redirect('/user');
+        } else {
+            req.flash('success', 'User successfully deleted!');
+            res.redirect('/user');
         }
     });
 });
