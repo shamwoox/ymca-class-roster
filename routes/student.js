@@ -45,5 +45,16 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
     });
 });
 
+//Destroy student
+router.delete('/:id', function(req, res) {
+    Student.findByIdAndRemove(req.params.id, function(err) {
+        if(err) {
+            res.redirect('/students');
+        } else {
+            req.flash('success', 'Student successfully deleted!');
+            res.redirect('/students');
+        }
+    });
+});
 
 module.exports = router;

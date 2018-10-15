@@ -1,7 +1,40 @@
 <% include ../partials/header %>
 
+<br>
 <div class="container">
-    <h1><%= student.firstName %> <%= student.lastName %></h1>
+	<h1><i class="far fa-address-card"></i> Student Profile</h1>
+	<hr>
+	<% if(success && success.length > 0) { %>
+		<div class="alert alert-success" role="alert">
+			<%= success %>
+		</div>
+	<% } %>
+  <div class="card bg-light mb-3" style="max-width: 18rem;">
+    <div class="card-header"><%= student.firstName %> <%= student.lastName %></div>
+    	<div class="card-body">
+			<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
+			<hr>
+            <p class="card-text"><i class="fas fa-calendar-alt"></i> Age: <%= student.age %></p>
+            <p class="card-text">
+                <% if(student.gender === "Male") { %>
+                    <i class="fas fa-mars"></i>
+                <% } else if(student.gender === "Female") { %>
+                    <i class="fas fa-venus"></i>
+                <% } else { %>
+                    <i class="fas fa-transgender-alt"></i>
+                <% } %>
+                Gender: <%= student.gender %>
+            </p>
+			<% if(currentUser && currentUser.isAdmin) { %>
+			<a href="#" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
+			<% } %>
+			<% if(currentUser && currentUser.isAdmin) { %>
+				<form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+					<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
+				</form>
+			<% } %>
+		</div>
+  </div>
 </div>
 
 <% include ../partials/footer %>
