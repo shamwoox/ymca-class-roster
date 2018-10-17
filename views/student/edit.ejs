@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+
+<div class="container-fluid">
+	<div class="parent">
+  	<div class="form">
+    	<div class="row">
+      	<div class="shadow-lg p-3 mb-5 bg-white rounded">
+					<form action="/students/<%= student._id %>?_method=PUT" method="POST">
+						<h1 class="text-center">Edit Information</h1>
+						<hr>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="firstName">First Name</label>
+								<input type="text" name="student[firstName]" class="form-control" id="firstName" value="<%= student.firstName %>" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="lastName">Last Name</label>
+								<input type="text" name="student[lastName]" class="form-control" id="lastName" value="<%= student.lastName %>" required>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="age">Age</label>
+								<input type="number" name="student[age]" class="form-control" id="age" value="<%= student.age %>">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="gender">Gender</label>
+								<select name="student[gender]" class="form-control" id="gender" value="<%= student.gender %>">
+									<option disabled selected>Select</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
+						<a href="/students/<%= student._id %>" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</a>
+      		</form>
+      	</div>
+    	</div>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>
+

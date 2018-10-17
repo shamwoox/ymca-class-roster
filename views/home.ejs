@@ -8,6 +8,142 @@
   <% } %>
     <h1 style="text-align: center">My Dashboard</h1>
     <hr>
+
+<!-- Agenda code -->
+<div class="alert alert-primary">
+  <h4>Welcome</h4>
+  <p>You can find upcoming classes and employee schedules below.</p>
+</div>
+<hr />
+
+<div class="agenda">
+  <div class="table-responsive">
+      <table class="table table-condensed table-bordered">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Class</th>
+                  <th>Instructor</th>
+                  <th>Students</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Single event in a single day -->
+              <tr>
+                  <td class="agenda-date" class="active" rowspan="1">
+                      <div class="dayofmonth">26</div>
+                      <div class="dayofweek">Saturday</div>
+                      <div class="shortdate text-muted">July, 2018</div>
+                  </td>
+                  <td class="agenda-time">
+                      5:30 - 6:45 AM
+                  </td>
+                  <td class="agenda-events">
+                      <div class="agenda-event">
+                          Water Stamina
+                      </div>
+                  </td>
+                  </td>
+                  <td class="agenda-instructor">
+                      <div class="agenda-instructor">
+
+                      </div>
+                  </td>
+                  <td class="agenda-students">
+                      <div class="agenda-students">
+
+                      </div>
+                  </td>
+              </tr>
+
+              <!-- Multiple events in a single day (note the rowspan) -->
+              <tr>
+                  <td class="agenda-date" class="active" rowspan="3" onclick="$('#exampleModal').modal('show')" )>
+                      <div class="dayofmonth">24</div>
+                      <div class="dayofweek">Thursday</div>
+                      <div class="shortdate text-muted">July, 2018</div>
+                  </td>
+                  <td class="agenda-time">
+                      8:00 - 9:00 AM
+                  </td>
+                  <td class="agenda-events">
+                      <div class="agenda-event">
+                          Water Movement
+                      </div>
+                  </td>
+                  <td class="agenda-instructor">
+                      <div class="agenda-instructor">
+
+                      </div>
+                      <td class="agenda-students">
+                          <div class="agenda-students">
+
+                          </div>
+              </tr>
+              <tr>
+                  <td class="agenda-time">
+                      10:15 AM - 12:00 PM
+                  </td>
+                  <td class="agenda-events">
+                      <div class="agenda-event">
+                          Water Exploration
+                      </div>
+                  </td>
+                  <td class="agenda-instructor">
+                      <div class="agenda-instructor">
+
+                      </div>
+                      <td class="agenda-students">
+                          <div class="agenda-students">
+
+                          </div>
+              </tr>
+              <tr>
+                  <td class="agenda-time">
+                      7:00 - 9:00 PM
+                  </td>
+                  <td class="agenda-events">
+                      <div class="agenda-event">
+                          Water Acclimation
+                      </div>
+                  </td>
+                  <td class="agenda-instructor">
+                      <div class="agenda-instructor">
+
+                      </div>
+                      <td class="agenda-students">
+                          <div class="agenda-students">
+
+                          </div>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+<!-- Modals -->
+
+<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
 </div>
 
 <% include ./partials/footer %>

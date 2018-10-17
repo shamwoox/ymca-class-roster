@@ -26,7 +26,7 @@
                 Gender: <%= student.gender %>
             </p>
 			<% if(currentUser && currentUser.isAdmin) { %>
-			<a href="#" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
+			<a href="/students/<%= student._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
 			<% } %>
 			<% if(currentUser && currentUser.isAdmin) { %>
 				<form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">

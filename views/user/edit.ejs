@@ -2,36 +2,32 @@
 
 <div class="container-fluid">
 	<div class="parent">
-  <div class="form">
-    <div class="row">
-      <div class="shadow-lg p-3 mb-5 bg-white rounded">
-				<form action="/user/<%= user._id %>?_method=PUT" method="POST">
-					<h1 class="text-center">Edit Information</h1>
-					<hr>
-					<small class="form-text text-muted text-center">We won't share any of your personal information</small>
-					<br>
-					<div class="form-row">
-						<div class="form-group col-md-6">
-							<label for="email">*email</label>
-							<input type="email" name="user[email]" class="form-control" id="email" value="<%= user.email %>" required>
+  	<div class="form">
+    	<div class="row">
+      	<div class="shadow-lg p-3 mb-5 bg-white rounded">
+					<form action="/user/<%= user._id %>?_method=PUT" method="POST">
+						<h1 class="text-center">Edit Information</h1>
+						<hr>
+						<small class="form-text text-muted text-center">We won't share any of your personal information</small>
+						<br>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="email">*email</label>
+								<input type="email" name="user[email]" class="form-control" id="email" value="<%= user.email %>" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="phone">*Phone</label>
+								<input type="text" name="user[phone]" class="form-control" id="phone" value="<%= user.phone %>" required>
+							</div>
 						</div>
-						<div class="form-group col-md-6">
-							<label for="phone">*Phone</label>
-							<input type="text" name="user[phone]" class="form-control" id="phone" value="<%= user.phone %>" required>
-						</div>
-					</div>
-					<hr>
-					<div class="form-row">
-						
-					</div>
-					<button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
-					<a href="/user/<%= user._id %>" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</a>
-        	</div>
-      	</form>
-      </div>
-    </div>
+						<hr>
+						<button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
+						<a href="/user/<%= user._id %>" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</a>
+      		</form>
+      	</div>
+    	</div>
+		</div>
 	</div>
-</div>
 </div>
 
 <% include ../partials/footer %>
