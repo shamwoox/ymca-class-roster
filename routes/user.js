@@ -32,7 +32,14 @@ router.get('/:id/edit',function(req, res) {
         if(err) {
             res.redirect('/');
         } else {
-            res.render('user/edit', {user: foundUser});
+            if(req.user.isAdmin || req.user._id == req.params.id) {
+                res.render('user/edit', {user: foundUser});
+            } else {
+                console.log(req.user._id);
+                console.log(req.params.id);
+                req.flash('error', "You don't have permission to edit users!");
+                res.redirect('/user/' + req.params.id);
+            }
         }
     });
 });

@@ -6,6 +6,11 @@
 			<%= success %>
 		</div>
 	<% } %>
+	<% if(error && error.length > 0) { %>
+		<div class="alert alert-danger" role="alert">
+			<%= error %>
+		</div>
+	<% } %>
 	<h2>Students</h2>
 	<p>Type student name:</p>  
 
@@ -13,8 +18,10 @@
 		<input type="text" class="form-control" id="myInput">
 		<div class="input-group-append">
 			<span class="input-group-text"><i class="fas fa-search"></i></span> 
-        </div>
-        <a href="/students/new" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></a>
+		</div>
+		<% if(currentUser && currentUser.isAdmin) { %>
+		<a href="/students/new" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></a>
+		<% } %>
 	</div>
 
 	<!-- <input class="form-control" id="myInput" type="text" placeholder="Search.."> -->

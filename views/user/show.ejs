@@ -9,6 +9,11 @@
 			<%= success %>
 		</div>
 	<% } %>
+	<% if(error && error.length > 0) { %>
+		<div class="alert alert-danger" role="alert">
+			<%= error %>
+		</div>
+	<% } %>
   <div class="card bg-light mb-3" style="max-width: 18rem;">
     <div class="card-header"><%= user.firstName %> <%= user.lastName %></div>
     	<div class="card-body">

@@ -9,27 +9,49 @@
 						<h2>New Student</h2>
 						<hr>
 						<div class="form-row">
-							<div class="form-group col-md-6">
+							<div class="form-group col-md-5">
 								<label for="firstName">First Name</label>
-								<input type="text" name="student_first_name" class="form-control" id="firstName" placeholder="Jane">
+								<input type="text" name="student_first_name" class="form-control" id="firstName" placeholder="Jane" required>
 							</div>
-							<div class="form-group col-md-6">
+							<div class="form-group col-md-2">
+								<label for="middleName">Middle Initial</label>
+								<input type="text" name="student_middle_name" class="form-control" id="middleName" placeholder="M" maxlength="1">
+							</div>
+							<div class="form-group col-md-5">
 								<label for="lastName">Last Name</label>
-								<input type="text" name="student_last_name" class="form-control" id="lastName" placeholder="Doe">
+								<input type="text" name="student_last_name" class="form-control" id="lastName" placeholder="Doe" required>
 							</div>
 						</div>
 						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="age">Age</label>
-								<input type="number" name="student_age" class="form-control" id="age">
+							<div class="form-group col-md-3">
+								<label for="month">Month</label>
+								<select name="student_month" class="form-control" id="month" required>
+									<option disabled selected>Select</option>
+									<% months.forEach(function(month) { %>
+										<option value="<%= month %>"> <%= month %> </option>
+									<% }) %>
+								</select>
 							</div>
-							<div class="form-group col-md-6">
+							<div class="form-group col-md-2">
+								<label for="day">Day</label>
+								<input type="number" name="student_day" class="form-control" id="day" min="1" max="31" required>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="year">Year</label>
+								<select name="student_year" class="form-control" id="year" required>
+									<option disabled selected> Select </option>
+									<% for(var i = (new Date()).getFullYear(); i >= 1920 ; i--) { %>
+										<option value="<%= i %>"><%= i %></option>
+									<% } %>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
 								<label for="gender">Gender</label>
-								<select name="student_gender" class="form-control" id="gender">
-									<option>Select</option>
-									<option value="Male">Male</option>
-									<option value="Female">Female</option>
-									<option value="Other">Other</option>
+								<select name="student_gender" class="form-control" id="gender" required>
+									<option disabled selected>Select</option>
+									<% genders.forEach(function(gender) { %>
+										<option value="<%= gender %>"><%= gender %></option>
+									<% }) %>
 								</select>
 							</div>
 						</div>

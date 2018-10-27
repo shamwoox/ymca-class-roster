@@ -9,22 +9,30 @@
 			<%= success %>
 		</div>
 	<% } %>
+	<% if(error && error.length > 0) { %>
+		<div class="alert alert-danger" role="alert">
+			<%= error %>
+		</div>
+	<% } %>
   <div class="card bg-light mb-3" style="max-width: 18rem;">
     <div class="card-header"><%= student.firstName %> <%= student.lastName %></div>
     	<div class="card-body">
 			<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
 			<hr>
-            <p class="card-text"><i class="fas fa-calendar-alt"></i> Age: <%= student.age %></p>
-            <p class="card-text">
-                <% if(student.gender === "Male") { %>
-                    <i class="fas fa-mars"></i>
-                <% } else if(student.gender === "Female") { %>
-                    <i class="fas fa-venus"></i>
-                <% } else { %>
-                    <i class="fas fa-transgender-alt"></i>
-                <% } %>
-                Gender: <%= student.gender %>
-            </p>
+				<p class="card-text"><i class="fas fa-smile"></i> Age: <%= (new Date()).getFullYear() - student.year %></p>
+				<p class="card-text">
+						<i class="fas fa-birthday-cake"></i> Date of Birth: <%= student.month %>  <%= student.day %>, <%= student.year %>
+				</p>
+        <p class="card-text">
+          <% if(student.gender === "Male") { %>
+            <i class="fas fa-mars"></i>
+          <% } else if(student.gender === "Female") { %>
+            <i class="fas fa-venus"></i>
+          <% } else { %>
+            <i class="fas fa-transgender-alt"></i>
+          <% } %>
+            Gender: <%= student.gender %>
+        </p>
 			<% if(currentUser && currentUser.isAdmin) { %>
 			<a href="/students/<%= student._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
 			<% } %>

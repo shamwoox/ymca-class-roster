@@ -1,6 +1,7 @@
 var express = require('express'),
     Student = require('../models/student'),
     middleware = require('../middleware/index'),
+    User = require('../models/user'),
     myFunctions = require('../public/main');
     router = express.Router();
 
@@ -15,17 +16,46 @@ router.get('/', middleware.isLoggedIn, function(req, res) {
     });
 });
 
+var months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+var genders = [
+    'Male',
+    'Female',
+    'Other'
+];
+
 //Show new student form
 router.get('/new', middleware.isLoggedIn,function(req, res) {
-    res.render('student/new');
+    if(req.user.isAdmin) {
+        res.render('student/new', {months: months, genders: genders});
+    } else {
+        req.flash('error', "You don't have permission to add a new student!");
+        res.redirect('/students')
+    }
 });
 
 //Create new student
 router.post('/', middleware.isLoggedIn, function(req, res) {
     Student.create({
         firstName: req.body.student_first_name,
+        middleName: req.body.student_middle_name,
         lastName: req.body.student_last_name,
-        age: req.body.student_age,
+        month: req.body.student_month,
+        day: req.body.student_day,
+        year: Number(req.body.student_year),
         gender: req.body.student_gender
     }, function(err, createdStudent) {
         if(err) {
@@ -55,7 +85,12 @@ router.get('/:id/edit', function(req, res) {
         if(err) {
             res.redirect('/');
         } else {
-            res.render('student/edit', {student: foundStudent});
+            if(req.user.isAdmin) {
+                res.render('student/edit', {student: foundStudent, months: months, genders: genders});
+            } else {
+                req.flash('error', "You don't have permission to edit students!");
+                res.redirect('/students/' + req.params.id);
+            }
         }
     });
 });
@@ -67,6 +102,7 @@ router.put('/:id', function(req, res) {
         if(err) {
             res.redirect('/students/' + req.params.id +'/edit');
         } else {
+            console.log(student);
             req.flash('success', 'Successfully updated student profile!');
             res.redirect('/students/' + req.params.id);
         }

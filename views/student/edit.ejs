@@ -9,30 +9,64 @@
 						<h1 class="text-center">Edit Information</h1>
 						<hr>
 						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="firstName">First Name</label>
-								<input type="text" name="student[firstName]" class="form-control" id="firstName" value="<%= student.firstName %>" required>
+								<div class="form-group col-md-5">
+									<label for="firstName">First Name</label>
+									<input type="text" name="student[firstName]" class="form-control" id="firstName" value="<%= student.firstName %>" required>
+								</div>
+								<div class="form-group col-md-2">
+									<label for="middleName">Middle Initial</label>
+									<input type="text" name="student[middleName]" class="form-control" id="middleName" value="<%= student.middleName %>" maxlength="1">
+								</div>
+								<div class="form-group col-md-5">
+									<label for="lastName">Last Name</label>
+									<input type="text" name="student[lastName]" class="form-control" id="lastName" value="<%= student.lastName %>" required>
+								</div>
 							</div>
-							<div class="form-group col-md-6">
-								<label for="lastName">Last Name</label>
-								<input type="text" name="student[lastName]" class="form-control" id="lastName" value="<%= student.lastName %>" required>
-							</div>
-						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="age">Age</label>
-								<input type="number" name="student[age]" class="form-control" id="age" value="<%= student.age %>">
-							</div>
-							<div class="form-group col-md-6">
-								<label for="gender">Gender</label>
-								<select name="student[gender]" class="form-control" id="gender" value="<%= student.gender %>">
-									<option disabled selected>Select</option>
-									<option value="Male">Male</option>
-									<option value="Female">Female</option>
-									<option value="Other">Other</option>
-								</select>
-							</div>
-						</div>
+							<div class="form-row">
+									<div class="form-group col-md-3">
+										<label for="month">Month</label>
+										<select name="student[month]" class="form-control" id="month" required>
+											<option disabled>Select</option>
+											<% months.forEach(function(month) { %>
+												<% if(month === student.month) { %>
+													<option value="<%= month %>" selected> <%= month %> </option>
+												<% } else { %>
+													<option value="<%= month %>"> <%= month %> </option>
+												<% } %>
+											<% }) %>
+										</select>
+									</div>
+									<div class="form-group col-md-2">
+										<label for="day">Day</label>
+										<input type="number" name="student[day]" class="form-control" id="day" min="1" max="31" value="<%= student.day %>" required>
+									</div>
+									<div class="form-group col-md-3">
+										<label for="year">Year</label>
+										<select name="student[year]" class="form-control" id="year" required>
+											<option disabled> Select </option>
+											<% for(var i = (new Date()).getFullYear(); i >= 1920 ; i--) { %>
+												<% if(i === student.year) { %>
+													<option value="<%= i %>" selected><%= i %></option>
+												<% } else { %>
+													<option value="<%= i %>"><%= i %></option>
+												<% } %>
+											<% } %>
+										</select>
+									</div>
+									<div class="form-group col-md-4">
+										<label for="gender">Gender</label>
+										<select name="student[gender]" class="form-control" id="gender" required>
+											<option disabled>Select</option>
+											<% genders.forEach(function(gender) { %>
+												<% if(student.gender === gender) { %>
+													<option value="<%= gender %>" selected> <%= gender %> </option>
+												<% } else { %>
+													<option value="<%= gender %>"> <%= gender %> </option>
+												<% } %>
+											<% }) %>
+										</select>
+									</div>
+								</div>
 						<hr>
 						<button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
 						<a href="/students/<%= student._id %>" class="btn btn-danger"><i class="fas fa-ban"></i> Cancel</a>
