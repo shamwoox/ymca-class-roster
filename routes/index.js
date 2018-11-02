@@ -5,9 +5,33 @@ var express = require('express'),
     myFunctions = require('../public/main'),
     router = express.Router();
 
+var months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+var days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+];
+
 router.get('/', middleware.isLoggedIn, function(req, res) {
-    console.log(req.user);
-    res.render('home');
+    res.render('home', {months: months, days: days});
 });
 
 router.get('/login', function(req, res) {
@@ -26,11 +50,10 @@ router.post('/register', function(req, res) {
         phone: myFunctions.formatPhoneNumber(req.body.phone),
         username: req.body.username,
     });
-    if(req.body.adminCode == "ilovecorgis"/*process.env.YMCA_ADMIN_CODE*/) {
-        //console.log(process.env.YMCA_ADMIN_CODE);
+    if(req.body.adminCode == process.env.YMCA_ADMIN_CODE) {
         newUser.isAdmin = true;
     }
-    if(req.body.adminCode.length > 0 && req.body.adminCode != "ilovecorgis"/*process.env.YMCA_ADMIN_CODE*/) {
+    if(req.body.adminCode.length > 0 && req.body.adminCode != process.env.YMCA_ADMIN_CODE) {
         req.flash('error', 'Incorrect admin code');
         res.redirect('/register');
     } else {
@@ -57,6 +80,7 @@ router.post("/login", passport.authenticate("local",
     res.redirect('/');
 });
 
+//handling logout logic
 router.get('/logout', function(req, res) {
     req.logout();
     req.flash('success', 'You have successfully logged out!');

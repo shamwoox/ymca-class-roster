@@ -15,7 +15,12 @@
 		</div>
 	<% } %>
   <div class="card bg-light mb-3" style="max-width: 18rem;">
-    <div class="card-header"><%= student.firstName %> <%= student.lastName %></div>
+		<div class="card-header">
+			<%= student.firstName %> 
+			<% if(student.middleName.length > 0) { %>
+				<%= student.middleName %>.
+			<% } %>
+			 <%= student.lastName %></div>
     	<div class="card-body">
 			<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
 			<hr>

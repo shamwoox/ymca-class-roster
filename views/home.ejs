@@ -12,6 +12,10 @@
     <!-- Agenda code -->
     <div class="alert alert-primary">
     <h4>Welcome</h4>
+    <p>Today's Date: 
+      <%= days[(new Date()).getDay()] %>, <%= months[(new Date()).getMonth()] %> <%= (new Date()).getDate() %>, 
+      <%= (new Date()).getFullYear() %>
+    </p>
     <p>You can find upcoming classes and employee schedules below.</p>
     </div>
     <hr>

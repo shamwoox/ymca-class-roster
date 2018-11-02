@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+
+
+<div class="container">
+		<% if(success && success.length > 0) { %>
+			<div class="alert alert-success" role="alert">
+				<%= success %>
+			</div>
+		<% } %>
+		<% if(error && error.length > 0) { %>
+			<div class="alert alert-danger" role="alert">
+				<%= error %>
+			</div>
+		<% } %>
+    <h1>Sessions</h1>
+		<hr>
+		<% if(currentUser.isAdmin){ %>
+			<a href="/session/new" class="btn btn-success"><i class="fas fa-plus-square"></i> Add New Session</a>
+		<% } %>
+    <p></p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                  <% sessions.forEach(function(session) { %>
+										<li class="list-group-item">
+											<a href="#"><%= session.season %> <%= session.year %> </a>
+										</li>
+									<% }) %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

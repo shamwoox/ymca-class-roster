@@ -6,7 +6,7 @@ var express = require('express'),
 
 //List all instructors
 router.get('/', middleware.isLoggedIn, function(req, res) {
-    User.find({isAdmin: false}, function(err, allInstructors) {
+    User.find({}, function(err, allInstructors) {
         if(err) {
             console.log(err);
         } else {
@@ -35,8 +35,6 @@ router.get('/:id/edit',function(req, res) {
             if(req.user.isAdmin || req.user._id == req.params.id) {
                 res.render('user/edit', {user: foundUser});
             } else {
-                console.log(req.user._id);
-                console.log(req.params.id);
                 req.flash('error', "You don't have permission to edit users!");
                 res.redirect('/user/' + req.params.id);
             }
@@ -48,6 +46,7 @@ router.get('/:id/edit',function(req, res) {
 router.put('/:id', function(req, res) {
     var user = req.body.user;
     user.phone = myFunctions.formatPhoneNumber(user.phone);
+
     User.findByIdAndUpdate(req.params.id, user, function(err, updatedUser) {
         if(err) {
             res.redirect('/user/' + req.params.id +'/edit');
