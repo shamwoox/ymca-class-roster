@@ -1,0 +1,58 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <% if(success && success.length > 0) { %>
+		<div class="alert alert-success" role="alert">
+			<%= success %>
+		</div>
+	<% } %>
+	<% if(error && error.length > 0) { %>
+		<div class="alert alert-danger" role="alert">
+			<%= error %>
+		</div>
+	<% } %>
+    <h1><%= session.season %> <%= session.year %></h1>
+    <p>Start Date: <%= session.startDate %></p>
+    <p>End Date: <%= session.endDate %></p>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-header">
+                  Classes
+                </h5>
+                <% if(currentUser && currentUser.isAdmin) { %>
+                    <button class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i>
+                        Add Class
+                    </button>
+                <% } %>
+                <ul class="list-group list-group-flush">
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card" style="width: 18rem;">
+                <h5 class="card-header">
+                  Instructors
+                </h5>
+                <% if(currentUser && currentUser.isAdmin) { %>
+                    <a href="/session/<%= session._id %>/new/instructor" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i>
+                        Add Instructor
+                    </a>
+                <% } %>
+                <ul class="list-group list-group-flush">
+                    <% instructors.forEach(function(instructor) { %>
+                        <li class="list-group-item">
+                            <%= instructor.firstName %> <%= instructor.lastName %>
+                        </li>
+                    <% }) %>  
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

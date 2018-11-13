@@ -24,7 +24,7 @@
                 <ul class="list-group list-group-flush">
                   <% sessions.forEach(function(session) { %>
 										<li class="list-group-item">
-											<a href="#"><%= session.season %> <%= session.year %> </a>
+											<a href="/session/<%= session._id %>"><%= session.season %> <%= session.year %> </a>
 										</li>
 									<% }) %>
                 </ul>

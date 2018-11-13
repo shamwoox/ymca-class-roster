@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="parent">
+    <div class="form" style="text-align: center;">
+			<div class="row">
+				<div class="shadow-lg p-3 mb-5 bg-white rounded">
+					<form action='/session/<%= session._id %>/new/instructor' method="POST">
+						<h2>Add Instructor</h2>
+						<hr>
+						<div class="form-row">
+							<div class="form-group col-md-12">
+								<select name="new_instructor" multiple class="form-control">
+									<% instructors.forEach(function(instructor) { %>
+										<option value="<%= instructor._id %>"><%= instructor.firstName %> <%= instructor.lastName %></option>
+									<% }) %>
+								</select>
+							</div>
+						</div>
+						<hr>
+						<button type="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

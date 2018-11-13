@@ -14,40 +14,75 @@
 			<%= error %>
 		</div>
 	<% } %>
-  <div class="card bg-light mb-3" style="max-width: 18rem;">
-		<div class="card-header">
-			<%= student.firstName %> 
-			<% if(student.middleName.length > 0) { %>
-				<%= student.middleName %>.
-			<% } %>
-			 <%= student.lastName %></div>
-    	<div class="card-body">
-			<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
-			<hr>
-				<p class="card-text"><i class="fas fa-smile"></i> Age: <%= (new Date()).getFullYear() - student.year %></p>
-				<p class="card-text">
-						<i class="fas fa-birthday-cake"></i> Date of Birth: <%= student.month %>  <%= student.day %>, <%= student.year %>
-				</p>
-        <p class="card-text">
-          <% if(student.gender === "Male") { %>
-            <i class="fas fa-mars"></i>
-          <% } else if(student.gender === "Female") { %>
-            <i class="fas fa-venus"></i>
-          <% } else { %>
-            <i class="fas fa-transgender-alt"></i>
-          <% } %>
-            Gender: <%= student.gender %>
-        </p>
-			<% if(currentUser && currentUser.isAdmin) { %>
-			<a href="/students/<%= student._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
-			<% } %>
-			<% if(currentUser && currentUser.isAdmin) { %>
-				<form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
-					<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
-				</form>
-			<% } %>
+	<div class="row">
+		<div class="col-md-5">
+				<div class="card bg-light mb-3" style="max-width: 18rem;">
+						<div class="card-header">
+							<%= student.firstName %> 
+							<% if(student.middleName.length > 0) { %>
+								<%= student.middleName %>.
+							<% } %>
+							 <%= student.lastName %></div>
+							<div class="card-body">
+							<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
+							<hr>
+								<p class="card-text"><i class="fas fa-smile"></i> Age: <%= (new Date()).getFullYear() - student.year %></p>
+								<p class="card-text">
+										<i class="fas fa-birthday-cake"></i> Date of Birth: <%= student.month %>  <%= student.day %>, <%= student.year %>
+								</p>
+								<p class="card-text">
+									<% if(student.gender === "Male") { %>
+										<i class="fas fa-mars"></i>
+									<% } else if(student.gender === "Female") { %>
+										<i class="fas fa-venus"></i>
+									<% } else { %>
+										<i class="fas fa-transgender-alt"></i>
+									<% } %>
+										Gender: <%= student.gender %>
+								</p>
+							<% if(currentUser && currentUser.isAdmin) { %>
+							<a href="/students/<%= student._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
+							<% } %>
+							<% if(currentUser && currentUser.isAdmin) { %>
+								<form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+									<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
+								</form>
+							<% } %>
+						</div>
+					</div>
 		</div>
-  </div>
+		<div class="col-md-7">
+				<canvas id="myChart"></canvas>
+		</div>
+	</div>
 </div>
+
+<script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+            label: "My First dataset",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45],
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+			title: {
+				display: true,
+				text: 'Yearly progress'
+			}
+		}
+});
+</script>
+
 
 <% include ../partials/footer %>

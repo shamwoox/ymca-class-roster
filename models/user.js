@@ -9,6 +9,12 @@ var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
     isAdmin: {type: Boolean, default: false},
+    sessions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Session"
+        }
+    ],
 });
 
 UserSchema.plugin(passportLocalMongoose);

@@ -13,9 +13,13 @@ var SessionSchema = new mongoose.Schema({
     ],
     instructors: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        }
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+            },
+            firstName: String,
+            lastName: String
+        },
     ],
     students: [
         {
