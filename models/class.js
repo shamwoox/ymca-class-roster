@@ -10,13 +10,21 @@ var ClassSchema = new mongoose.Schema({
     endTime: String,
     dayOfWeek: String,
     instructor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            firstName: String,
+            lastName: String,
     },
     students: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Student"
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Student"
+            },
+            firstName: String,
+            lastName: String
         }
     ]
 });

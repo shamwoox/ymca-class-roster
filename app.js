@@ -38,11 +38,12 @@ passport.deserializeUser(User.deserializeUser());
 var indexRoutes = require('./routes/index');
 var userRoutes = require('./routes/user');
 var studentRoutes = require('./routes/student');
-var classRoutes = require('./routes/session');
+var sessionRoutes = require('./routes/session');
+
 app.use("/", indexRoutes);
 app.use("/user/", userRoutes);
 app.use("/students/", studentRoutes);
-app.use("/session/", classRoutes);
+app.use("/session/", sessionRoutes);
 
 app.listen('5000', function() {
     console.log('Server running on port 5000');

@@ -23,10 +23,10 @@
                   Classes
                 </h5>
                 <% if(currentUser && currentUser.isAdmin) { %>
-                    <button class="btn btn-success btn-sm">
+                    <a href="/session/<%= session._id %>/class/new" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i>
                         Add Class
-                    </button>
+                    </a>
                 <% } %>
                 <ul class="list-group list-group-flush">
                 </ul>
@@ -38,7 +38,7 @@
                   Instructors
                 </h5>
                 <% if(currentUser && currentUser.isAdmin) { %>
-                    <a href="/session/<%= session._id %>/new/instructor" class="btn btn-success btn-sm">
+                    <a href="/session/<%= session._id %>/instructor/new" class="btn btn-success btn-sm">
                         <i class="fas fa-plus"></i>
                         Add Instructor
                     </a>
@@ -47,9 +47,11 @@
                     <% instructors.forEach(function(instructor) { %>
                         <li class="list-group-item">
                             <%= instructor.firstName %> <%= instructor.lastName %>
-                            <form class="inline" action="/session/<%= session._id %>/instructor/<%= instructor._id %>?_method=PUT" method="POST">
-                                <button class="float-right btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                            </form>
+                            <% if(currentUser && currentUser.isAdmin) { %>
+                                <form class="inline" action="/session/<%= session._id %>/instructor/<%= instructor._id %>?_method=PUT" method="POST">
+                                    <button class="float-right btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            <% } %>
                         </li>
                     <% }) %>  
                 </ul>

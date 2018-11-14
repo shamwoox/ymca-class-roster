@@ -1,0 +1,42 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="parent">
+        <div class="form" style="text-align: center">
+            <div class="row">
+                <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                    <form>
+                        <h2>Create New Class</h2>
+                        <hr>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="className">Select Class Level</label>
+                                    <select class="form-control" id="className">
+                                        <% classes.forEach(function(level) { %>
+                                            <option><%= level.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="instructorName">Select Instructor</label>
+                                    <select class="form-control" id="instructorName">
+                                        <% instructors.forEach(function(instructor) { %>
+                                            <option><%= instructor.firstName %> <%= instructor.lastName %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
