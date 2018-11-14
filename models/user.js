@@ -11,9 +11,12 @@ var UserSchema = new mongoose.Schema({
     isAdmin: {type: Boolean, default: false},
     sessions: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Session"
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Session"
+            }
         }
+        
     ],
 });
 

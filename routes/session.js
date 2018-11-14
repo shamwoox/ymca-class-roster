@@ -71,7 +71,6 @@ router.get('/:id/new/instructor', middleware.isLoggedIn, function(req, res) {
                 console.log(err);
             } else {
                 Session.findById(req.params.id, function(err, foundSession) {
-                    console.log("INSTRUCTOR INFO" + foundInstructors);
                     res.render('user/include', {instructors: foundInstructors, session: foundSession});
                 });
             }
@@ -116,10 +115,18 @@ router.put('/:id/instructor/:instructorId', function(req, res) {
         if(err) {
             console.log(err);
         } else {
-            req.flash('success', 'Successfully removed an instructor from this session!');
-            res.redirect('/session/' + req.params.id);
+            console.log("SUCCESS");
         }
     });
+    User.update({}, {$pull: {sessions: {_id: req.params.id}}}, function(err, deletedSession) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log("SUCCESS");
+        }
+    });
+    req.flash('success', 'Successfully removed an instructor from this session!');
+    res.redirect('/session/' + req.params.id);
 });
 
 

@@ -50,10 +50,10 @@ router.post('/register', function(req, res) {
         phone: myFunctions.formatPhoneNumber(req.body.phone),
         username: req.body.username,
     });
-    if(req.body.adminCode == process.env.YMCA_ADMIN_CODE) {
+    if(req.body.adminCode == "ilovecorgis"/*process.env.YMCA_ADMIN_CODE*/) {
         newUser.isAdmin = true;
     }
-    if(req.body.adminCode.length > 0 && req.body.adminCode != process.env.YMCA_ADMIN_CODE) {
+    if(req.body.adminCode.length > 0 && req.body.adminCode != "ilovecorgis"/*process.env.YMCA_ADMIN_CODE*/) {
         req.flash('error', 'Incorrect admin code');
         res.redirect('/register');
     } else {
