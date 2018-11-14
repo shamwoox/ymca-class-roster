@@ -40,7 +40,6 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
             if(err) {
                 console.log(err);
             } else {
-                console.log(newSession);
                 req.flash('success', 'Successfuly created new session!');
                 res.redirect('/session');
             }
@@ -89,7 +88,6 @@ router.post('/:id/new/instructor', middleware.isLoggedIn, function(req, res) {
             res.redirect('/session/' + req.params.id);
         } else {
             var instructorID = req.body.new_instructor;
-            console.log(instructorID);
             User.findById(instructorID, function(err, foundInstructor) {
                 if(err || !foundInstructor) {
                     req.flash('error', 'Instructor not found!');
@@ -111,18 +109,22 @@ router.post('/:id/new/instructor', middleware.isLoggedIn, function(req, res) {
 });
 
 router.put('/:id/instructor/:instructorId', function(req, res) {
-    Session.update({}, {$pull: {instructors: {_id: req.params.instructorId}}}, function(err, deletedInstructor) {
+    //Remove sessions from instructors
+    User.update({_id: req.params.instructorId}, {$pull: {sessions: {_id: req.params.id}}}, function(err, deletedSession) {
         if(err) {
             console.log(err);
         } else {
-            console.log("SUCCESS");
+
         }
     });
-    User.update({}, {$pull: {sessions: {_id: req.params.id}}}, function(err, deletedSession) {
+
+    //Remove instructors from sessions
+    Session.update({_id: req.params.id}, {$pull: {instructors: {_id: req.params.instructorId}}}, function(err, deletedInstructor) {
         if(err) {
             console.log(err);
         } else {
-            console.log("SUCCESS");
+            // console.log("SUCCESSFULLY REMOVED INSTRUCTORS FROM SESSIONS");
+            // console.log(deletedInstructor);
         }
     });
     req.flash('success', 'Successfully removed an instructor from this session!');
