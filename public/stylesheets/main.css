@@ -31,3 +31,11 @@ form.inline {
 :-ms-input-placeholder {  
   text-align: center; 
 }
+
+span {
+  background: #db2e2e;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  border-radius: 5px;
+}

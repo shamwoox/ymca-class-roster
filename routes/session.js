@@ -34,16 +34,21 @@ router.get('/new', middleware.isLoggedIn,function(req, res) {
 
 //Create new session
 router.post('/', middleware.isLoggedIn, function(req, res) {
-    var newSession = req.body.session;
-    Session.create(newSession, function(err, createdSession) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log(newSession);
-            req.flash('success', 'Successfuly created new session!');
-            res.redirect('/session');
-        }
-    });
+    if (req.user.isAdmin) {
+        var newSession = req.body.session;
+        Session.create(newSession, function(err, createdSession) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log(newSession);
+                req.flash('success', 'Successfuly created new session!');
+                res.redirect('/session');
+            }
+        });
+    } else {
+        req.flash('error', 'You do not have permission to add a new session!');
+        res.redirect('/session');
+    }
 });
 
 //Show session's classes
@@ -60,15 +65,21 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
 
 //Show the add page for adding an instructor to a session
 router.get('/:id/new/instructor', middleware.isLoggedIn, function(req, res) {
-    User.find({}, function(err, foundInstructors) {
-        if(err) {
-            console.log(err);
-        } else {
-            Session.findById(req.params.id, function(err, foundSession) {
-                res.render('user/include', {instructors: foundInstructors, session: foundSession});
-            });
-        }
-    });
+    if(req.user.isAdmin) {
+        User.find({}, function(err, foundInstructors) {
+            if(err) {
+                console.log(err);
+            } else {
+                Session.findById(req.params.id, function(err, foundSession) {
+                    console.log("INSTRUCTOR INFO" + foundInstructors);
+                    res.render('user/include', {instructors: foundInstructors, session: foundSession});
+                });
+            }
+        });
+    } else {
+        req.flash('error', 'You do not have permission to add new instructor!');
+        res.redirect('/session/' + req.params.id);
+    }
 });
 
 //Add new instructors to session
@@ -88,7 +99,6 @@ router.post('/:id/new/instructor', middleware.isLoggedIn, function(req, res) {
                     foundSession.instructors.firstName = foundInstructor.firstName;
                     foundSession.instructors.lastName = foundInstructor.lastName;
                     foundSession.instructors.push(foundInstructor);
-                    
                     foundSession.save();
 
                     foundInstructor.sessions.push(foundSession);
@@ -100,6 +110,18 @@ router.post('/:id/new/instructor', middleware.isLoggedIn, function(req, res) {
         }
     });
 });
+
+router.put('/:id/instructor/:instructorId', function(req, res) {
+    Session.update({}, {$pull: {instructors: {_id: req.params.instructorId}}}, function(err, deletedInstructor) {
+        if(err) {
+            console.log(err);
+        } else {
+            req.flash('success', 'Successfully removed an instructor from this session!');
+            res.redirect('/session/' + req.params.id);
+        }
+    });
+});
+
 
 
 module.exports = router;

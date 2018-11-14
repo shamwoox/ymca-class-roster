@@ -47,6 +47,9 @@
                     <% instructors.forEach(function(instructor) { %>
                         <li class="list-group-item">
                             <%= instructor.firstName %> <%= instructor.lastName %>
+                            <form class="inline" action="/session/<%= session._id %>/instructor/<%= instructor._id %>?_method=PUT" method="POST">
+                                <button class="float-right btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </li>
                     <% }) %>  
                 </ul>
