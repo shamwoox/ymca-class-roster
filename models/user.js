@@ -16,8 +16,15 @@ var UserSchema = new mongoose.Schema({
                 ref: "Session"
             }
         }
-        
     ],
+    classes: [
+        {
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Class"
+            }
+        }
+    ]
 });
 
 UserSchema.plugin(passportLocalMongoose);

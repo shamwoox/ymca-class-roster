@@ -29,4 +29,4 @@ var ClassSchema = new mongoose.Schema({
     ]
 });
 
-module.exports = mongoose.model("Session", SessionSchema);
+module.exports = mongoose.model("Class", ClassSchema);

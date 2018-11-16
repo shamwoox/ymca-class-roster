@@ -17,7 +17,7 @@
     <hr>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-auto col-auto">
             <div class="card" style="width: 18rem;">
                 <h5 class="card-header">
                   Classes
@@ -29,11 +29,15 @@
                     </a>
                 <% } %>
                 <ul class="list-group list-group-flush">
+                    <% for(let i = 0; i < classes.length; i++) { %>
+                        <li class="list-group-item"><%= classes[i].levelName %></li>
+                    <% } %>
                 </ul>
+                
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card" style="width: 18rem;">
+        <div class="col-md-6 col-sm-auto col-auto">
+            <div class="card float-right" style="width: 18rem;">
                 <h5 class="card-header">
                   Instructors
                 </h5>
@@ -46,10 +50,12 @@
                 <ul class="list-group list-group-flush">
                     <% instructors.forEach(function(instructor) { %>
                         <li class="list-group-item">
-                            <%= instructor.firstName %> <%= instructor.lastName %>
+                            <a href="/user/<%= instructor._id %>"><%= instructor.firstName %> <%= instructor.lastName %></a>
                             <% if(currentUser && currentUser.isAdmin) { %>
                                 <form class="inline" action="/session/<%= session._id %>/instructor/<%= instructor._id %>?_method=PUT" method="POST">
-                                    <button class="float-right btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    <button type="submit" class="float-right btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstructor">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </form>
                             <% } %>
                         </li>
