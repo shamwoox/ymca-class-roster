@@ -3,45 +3,25 @@ var express = require('express'),
     User = require('../models/user'),
     middleware = require('../middleware/index'),
     myFunctions = require('../public/main'),
+    myObjects = require('../public/objects'),
     router = express.Router();
 
-var months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-];
-
-var days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
-];
-
+//Show homepage
 router.get('/', middleware.isLoggedIn, function(req, res) {
-    res.render('home', {months: months, days: days});
+    res.render('home', {months: myObjects.months, days: myObjects.days});
 });
 
+//Show login page
 router.get('/login', function(req, res) {
     res.render('login');
 });
 
+//Show register page
 router.get('/register', function(req, res) {
     res.render('register');
 });
 
+//Create new account
 router.post('/register', function(req, res) {
     var newUser = new User({
         firstName: req.body.first_name,
@@ -71,7 +51,7 @@ router.post('/register', function(req, res) {
 });
 
 //handling login logic
-router.post("/login", passport.authenticate("local", 
+router.post("/login", passport.authenticate("local",
 {
     failureRedirect: "/login",
     failureFlash: true,

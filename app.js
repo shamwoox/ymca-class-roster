@@ -1,4 +1,7 @@
+require('dotenv').load();
+
 var express = require('express'),
+    app = express(),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose')
     passport = require('passport'),
@@ -7,10 +10,15 @@ var express = require('express'),
     User = require('./models/user'),
     flash = require('connect-flash');
 
+var indexRoutes = require('./routes/index'),
+    userRoutes = require('./routes/user'),
+    studentRoutes = require('./routes/student'),
+    sessionRoutes = require('./routes/session'),
+    classRoutes = require('./routes/class');
+
 mongoose.connect('mongodb://localhost/ymca', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 
-var app = express();
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
@@ -35,15 +43,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-var indexRoutes = require('./routes/index');
-var userRoutes = require('./routes/user');
-var studentRoutes = require('./routes/student');
-var sessionRoutes = require('./routes/session');
-
 app.use("/", indexRoutes);
-app.use("/user/", userRoutes);
-app.use("/students/", studentRoutes);
-app.use("/session/", sessionRoutes);
+app.use("/user", userRoutes);
+app.use("/students", studentRoutes);
+app.use("/session/:id/class", classRoutes);
+app.use("/session", sessionRoutes);
 
 app.listen('5000', function() {
     console.log('Server running on port 5000');

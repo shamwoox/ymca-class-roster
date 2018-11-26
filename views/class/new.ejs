@@ -49,13 +49,9 @@
                                 <label for="dayOfWeek">Day of the Week</label>
                                 <select class="form-control" id="dayOfWeek" name="dayOfWeek">
                                     <option selected disabled>Select...</option>
-                                    <option value="Sunday">Sunday</option>
-                                    <option value="Monday">Monday</option>
-                                    <option value="Tuesday">Tuesday</option>
-                                    <option value="Wednesday">Wednesday</option>
-                                    <option value="Thursday">Thursday</option>
-                                    <option value="Friday">Friday</option>
-                                    <option value="Saturday">Saturday</option>
+                                    <% dayOfWeek.forEach(function(day) { %>
+                                        <option value="<%= day %>"><%= day %></option>
+                                    <% }) %>
                                 </select>
                             </div>
                         </div>
