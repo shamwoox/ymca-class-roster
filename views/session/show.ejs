@@ -30,10 +30,14 @@
                 <% } %>
                 <ul class="list-group list-group-flush">
                     <% for(let i = 0; i < classes.length; i++) { %>
-                        <li class="list-group-item"><a href="#"><%= classes[i].levelName %></a></li>
+                        <li class="list-group-item">
+                          <a href="/session/<%= session._id %>/class/<%= classes[i]._id %>">
+                            <%= classes[i].levelName %>
+                          </a>
+                        </li>
                     <% } %>
                 </ul>
-                
+
             </div>
         </div>
         <div class="col-md-6 col-sm-auto col-auto">
@@ -59,7 +63,7 @@
                                 </form>
                             <% } %>
                         </li>
-                    <% }) %>  
+                    <% }) %>
                 </ul>
             </div>
         </div>

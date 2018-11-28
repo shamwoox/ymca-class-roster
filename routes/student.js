@@ -2,6 +2,7 @@ var express = require('express'),
     Student = require('../models/student'),
     middleware = require('../middleware/index'),
     User = require('../models/user'),
+    myObjects = require('../public/objects'),
     myFunctions = require('../public/main');
     router = express.Router();
 
@@ -16,31 +17,10 @@ router.get('/', middleware.isLoggedIn, function(req, res) {
     });
 });
 
-var months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-];
-
-var genders = [
-    'Male',
-    'Female',
-    'Other'
-];
-
 //Show new student form
 router.get('/new', middleware.isLoggedIn,function(req, res) {
     if(req.user.isAdmin) {
-        res.render('student/new', {months: months, genders: genders});
+        res.render('student/new', {months: myObjects.months, genders: myObjects.genders});
     } else {
         req.flash('error', "You don't have permission to add a new student!");
         res.redirect('/students')

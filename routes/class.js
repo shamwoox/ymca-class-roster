@@ -8,6 +8,7 @@ var express = require('express'),
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
+
 //Show new class form
 router.get('/new', middleware.isLoggedIn, function(req, res) {
     console.log("ACCOUNT SID: " + process.env.TWILIO_ACCOUNT_SID);
@@ -71,4 +72,16 @@ router.post('/new', function(req, res) {
         });
     }
 });
+
+//Show more information about class
+router.get('/:class_id', middleware.isLoggedIn, function(req, res) {
+    Class.findById(req.params.class_id, function(err, foundClass) {
+        if(err || !foundClass) {
+            console.log(err);
+        } else {
+            res.render('class/show', {foundClass: foundClass});
+        }
+    });
+});
+
 module.exports = router;

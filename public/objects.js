@@ -1,5 +1,11 @@
 const myObjects = {};
 
+myObjects.genders = [
+    'Male',
+    'Female',
+    'Other'
+];
+
 myObjects.months = [
     'January',
     'February',
