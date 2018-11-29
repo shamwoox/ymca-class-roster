@@ -3,8 +3,12 @@ var mongoose = require('mongoose');
 var ClassSchema = new mongoose.Schema({
     levelName: String,
     session: {
+      id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Session"
+      },
+      season: String,
+      year: String
     },
     startTime: String,
     endTime: String,

@@ -52,7 +52,8 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
             req.flash('error', 'This session does not exist!');
             res.redirect('/session');
         } else {
-            Class.find({session: req.params.id}, function(err, foundClasses) {
+            Class.find({'session.id': req.params.id}, function(err, foundClasses) {
+              console.log("FOUND CLASSES: " + foundClasses);
                 res.render('session/show', {classes: foundClasses, session: foundSession,
                     instructors: foundSession.instructors});
             });

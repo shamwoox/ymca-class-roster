@@ -4,11 +4,14 @@ var express = require('express'),
     middleware = require('../middleware/index'),
     myFunctions = require('../public/main'),
     myObjects = require('../public/objects'),
+    Class = require('../models/class'),
     router = express.Router();
 
 //Show homepage
 router.get('/', middleware.isLoggedIn, function(req, res) {
-    res.render('home', {months: myObjects.months, days: myObjects.days});
+  Class.find({'instructor.id': req.user._id}, function(err, foundClasses) {
+    res.render('home', {months: myObjects.months, days: myObjects.days, foundClasses: foundClasses});
+  });
 });
 
 //Show login page

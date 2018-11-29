@@ -23,6 +23,9 @@ router.post('/new', function(req, res) {
     if(req.user.isAdmin) {
         User.findById(req.body.instructorId, function(err, foundInstructor) {
             Session.findById(req.params.id, function(err, foundSession) {
+                if(err) {
+                  console.log(err);
+                }
                 var newClass = {
                     levelName: req.body.levelName,
                     startTime: req.body.startTime,
@@ -34,7 +37,10 @@ router.post('/new', function(req, res) {
                     }
                 }
                 newClass.instructor.id = foundInstructor;
-                newClass.session = foundSession;
+                newClass.session = {};
+                newClass.session.id = foundSession;
+                newClass.session.season = foundSession.season;
+                newClass.session.year = foundSession.year;
                 Class.create(newClass, function(err, createdClass) {
                     if(err) {
                         console.log(err);

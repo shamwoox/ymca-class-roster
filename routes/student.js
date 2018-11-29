@@ -66,7 +66,7 @@ router.get('/:id/edit', function(req, res) {
             res.redirect('/');
         } else {
             if(req.user.isAdmin) {
-                res.render('student/edit', {student: foundStudent, months: months, genders: genders});
+                res.render('student/edit', {student: foundStudent, months: myObjects.months, genders: myObjects.genders});
             } else {
                 req.flash('error', "You don't have permission to edit students!");
                 res.redirect('/students/' + req.params.id);

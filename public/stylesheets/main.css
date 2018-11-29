@@ -2,8 +2,8 @@
   display: inline-block;
 }
 
-form.inline { 
-  float:right; 
+form.inline {
+  float:right;
 }
 
 .parent {
@@ -21,15 +21,15 @@ form.inline {
 }
 
 :-moz-placeholder { /* Firefox 18- */
-  text-align: center;  
+  text-align: center;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-  text-align: center;  
+  text-align: center;
 }
 
-:-ms-input-placeholder {  
-  text-align: center; 
+:-ms-input-placeholder {
+  text-align: center;
 }
 
 span {
@@ -53,4 +53,13 @@ span {
 
 .row-striped {
     padding: 15px 0;
+}
+
+a, a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.agenda:hover {
+  background-color: #B3B3B3;
 }

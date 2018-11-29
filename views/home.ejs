@@ -11,49 +11,33 @@
 
     <div class="alert alert-primary">
       <h4>Welcome</h4>
-      <p>Today's Date: 
-        <%= days[(new Date()).getDay()] %>, <%= months[(new Date()).getMonth()] %> <%= (new Date()).getDate() %>, 
+      <p>Today's Date:
+        <%= days[(new Date()).getDay()] %>, <%= months[(new Date()).getMonth()] %> <%= (new Date()).getDate() %>,
         <%= (new Date()).getFullYear() %>
       </p>
-      <p>You can find upcoming classes and employee schedules below.</p>
+      <p>You can find a list of your classes below.</p>
     </div>
     <hr>
 
     <!-- AGENDA -->
 
     <div class="container">
-        <div class="row row-striped">
-          <div class="col-2 text-right">
-            <h1 class="display-4"><span class="badge badge-secondary">23</span></h1>
-            <h2>OCT</h2>
-          </div>
+      <% for (var key in foundClasses) { %>
+        <a href="/session/<%= foundClasses[key].session.id %>/class/<%= foundClasses[key]._id %>">
+        <div class="row row-striped agenda">
           <div class="col-10">
-            <h3 class="text-uppercase"><strong>A / Water Discovery</strong></h3>
+            <h3 class="text-uppercase"><strong><%= foundClasses[key].levelName %></strong></h3>
+            <h6><%= foundClasses[key].session.season %> <%= foundClasses[key].session.year %></h6>
             <ul class="list-inline">
-                <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> Monday</li>
-              <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> 12:30 PM - 2:00 PM</li>
-              <!-- <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> Cafe</li> -->
+              <li class="list-inline-item"><i class="fas fa-calendar-alt"></i> <%= foundClasses[key].dayOfWeek %></li>
+              <li class="list-inline-item"><i class="fas fa-clock"></i> <%= foundClasses[key].startTime %> - <%= foundClasses[key].endTime %></li>
             </ul>
-            <p>Blow bubbles on surface, assisted</p>
           </div>
         </div>
-        <div class="row row-striped">
-          <div class="col-2 text-right">
-            <h1 class="display-4"><span class="badge badge-secondary">27</span></h1>
-            <h2>OCT</h2>
-          </div>
-          <div class="col-10">
-            <h3 class="text-uppercase"><strong>B / Water Exploration</strong></h3>
-            <ul class="list-inline">
-                <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> Friday</li>
-              <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> 2:30 PM - 4:00 PM</li>
-              <!-- <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> Room 4019</li> -->
-            </ul>
-            <p>Water exit assisted</p>
-          </div>
-        </div>
-      </div>
-
+      </a>
+      <% } %>
+    </div>
+<div>
 
 
 <% include ./partials/footer %>
