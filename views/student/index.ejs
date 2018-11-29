@@ -12,12 +12,12 @@
 		</div>
 	<% } %>
 	<h2>Students</h2>
-	<p>Type student name:</p>  
+	<p>Type student name:</p>
 
 	<div class="input-group">
 		<input type="text" class="form-control" id="myInput">
 		<div class="input-group-append">
-			<span class="input-group-text"><i class="fas fa-search"></i></span> 
+			<span class="input-group-text"><i class="fas fa-search"></i></span>
 		</div>
 		<% if(currentUser && currentUser.isAdmin) { %>
 		<a href="/students/new" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></a>
@@ -30,9 +30,9 @@
 		<% students.forEach(function(student) { %>
 			<li class="list-group-item"><a href="/students/<%= student._id %>"><%= student.firstName %> <%= student.lastName %></a></li>
 		<% }) %>
-	</ul>  
+	</ul>
 </div>
-	
+
 <script>
 	$(document).ready(function(){
 		$("#myInput").on("keyup", function() {

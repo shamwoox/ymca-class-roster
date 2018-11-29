@@ -7,7 +7,22 @@ var StudentSchema = new mongoose.Schema({
     month: String,
     day: Number,
     year: Number,
-    gender: String
+    gender: String,
+    classes: [
+      {
+        id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Class"
+        },
+        levelName: String,
+        season: String,
+        year: String
+      }
+    ],
+    skills: [
+      {
+      }
+    ]
 });
 
 module.exports = mongoose.model("Student", StudentSchema);

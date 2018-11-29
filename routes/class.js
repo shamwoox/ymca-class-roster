@@ -61,17 +61,17 @@ router.post('/new', function(req, res) {
                         res.redirect('/session/' + req.params.id);
 
                         //Send sms to instructor using Twilio
-                        let sms_message = 'You have been added to the following class: ' + foundSession.season +
-                        ' ' + foundSession.year + ' ' + createdClass.levelName + '. Details: ' + createdClass.dayOfWeek + ' from ' +
-                        createdClass.startTime + ' to ' + createdClass.endTime;
-                        client.messages
-                        .create({
-                           body: sms_message,
-                           from: '+16094453618',
-                           to: '+1' + foundInstructor.phone.replace(/[^A-Z0-9]/ig, "")
-                         })
-                        .then(message => console.log(message.sid))
-                        .done();
+                        // let sms_message = 'You have been added to the following class: ' + foundSession.season +
+                        // ' ' + foundSession.year + ' ' + createdClass.levelName + '. Details: ' + createdClass.dayOfWeek + ' from ' +
+                        // createdClass.startTime + ' to ' + createdClass.endTime;
+                        // client.messages
+                        // .create({
+                        //    body: sms_message,
+                        //    from: '+16094453618',
+                        //    to: '+1' + foundInstructor.phone.replace(/[^A-Z0-9]/ig, "")
+                        //  })
+                        // .then(message => console.log(message.sid))
+                        // .done();
                     }
                 });
             });

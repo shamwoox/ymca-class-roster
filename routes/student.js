@@ -44,7 +44,7 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
             req.flash('success', 'Successfully added new student!');
             res.redirect('/students');
         }
-    })
+    });
 });
 
 //Show more information about student

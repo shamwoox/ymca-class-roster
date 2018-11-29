@@ -1,0 +1,62 @@
+<% include ../partials/header %>
+
+<div class="container">
+  <div class="parent">
+    <div class="form" style="text-align: center;">
+      <div class="row">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+					<form action="/session/<%= session._id %>?_method=PUT" method="POST">
+						<h2>Edit Session</h2>
+						<hr>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="sessionSeason">Session Season</label>
+								<select name="session[season]" id="sessionSeason" class="form-control" required>
+									<option disabled>Select...</option>
+									<% seasons.forEach(function(season) { %>
+                    <% if(season === session.season) { %>
+                      <option value="<%= season %>" selected> <%= season %> </option>
+                    <% } else { %>
+                      <option value="<%= season %>"> <%= season %> </option>
+                    <% } %>
+									<% }) %>
+								</select>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="sessionYear">Session Year</label>
+								<select name="session[year]" id="sessionYear" class="form-control" required>
+									<option disabled>Select...</option>
+									<% var year =  (new Date()).getFullYear() %>
+									<% for(var i = year, n = year + 3; i < n ; i++) { %>
+                    <% if(i == session.year) { %>
+                      <option value="<%= i %>" selected><%= i %></option>
+                    <% } else { %>
+                      <option value="<%= i %>"><%= i %></option>
+                    <% } %>
+									<% } %>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="sessionStart">Start Date</label>
+								<!-- <input type="text" name="session[startDate]" id="sessionStart" class="form-control"> -->
+								<input id="date" name="session[startDate]" class="form-control" type="date" value="<%= session.startDate %>" required>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="sessionEnd">End Date</label>
+								<!-- <input type="text" name="session[endDate]" id="sessionEnd" class="form-control"> -->
+								<input id="date" name="session[endDate]" class="form-control" type="date" value="<%= session.endDate %>" required>
+							</div>
+						</div>
+						<hr>
+						<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+						<a href="/session/<%= session._id %>" class="btn btn-danger btn-sm">Cancel</a>
+					</form>
+      	</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

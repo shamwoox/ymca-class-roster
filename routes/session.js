@@ -22,7 +22,7 @@ router.get('/new', middleware.isLoggedIn,function(req, res) {
     if(req.user.isAdmin) {
         res.render('session/new', {seasons: myObjects.seasons});
     } else {
-        req.flash('error', "You don't have permission to add a new student!");
+        req.flash('error', "You don't have permission to add a new session!");
         res.redirect('/session')
     }
 });
@@ -43,6 +43,35 @@ router.post('/', middleware.isLoggedIn, function(req, res) {
         req.flash('error', 'You do not have permission to add a new session!');
         res.redirect('/session');
     }
+});
+
+//Get edit form
+router.get('/:id/edit', middleware.isLoggedIn, function(req, res) {
+  Session.findById(req.params.id, function(err, foundSession) {
+    if(err || !foundSession) {
+      req.flash('error', 'An error has occured!');
+      res.redirect('/session');
+    } else {
+      if(req.user.isAdmin) {
+        res.render('session/edit', {seasons: myObjects.seasons, session: foundSession});
+      } else {
+        req.flash('error', 'You do not have permission to edit session!');
+        res.redirect('/session');
+      }
+    }
+  });
+});
+
+router.put('/:id', middleware.isLoggedIn, function(req, res) {
+  var session = req.body.session;
+  Session.findByIdAndUpdate(req.params.id, session,function(err, foundSession) {
+    if(err) {
+        res.redirect('/session/' + req.params.id +'/edit');
+    } else {
+        req.flash('success', 'Successfully updated session!');
+        res.redirect('/session/' + req.params.id);
+    }
+  });
 });
 
 //Show session's classes and instructors
