@@ -82,7 +82,6 @@ router.put('/:id', function(req, res) {
         if(err) {
             res.redirect('/students/' + req.params.id +'/edit');
         } else {
-            console.log(student);
             req.flash('success', 'Successfully updated student profile!');
             res.redirect('/students/' + req.params.id);
         }

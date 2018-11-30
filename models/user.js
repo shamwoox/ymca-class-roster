@@ -22,6 +22,10 @@ var UserSchema = new mongoose.Schema({
             id: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Class"
+            },
+            seasion_id: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: "Session"
             }
         }
     ]

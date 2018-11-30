@@ -11,7 +11,6 @@ const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWI
 
 //Show new class form
 router.get('/new', middleware.isLoggedIn, function(req, res) {
-    console.log("ACCOUNT SID: " + process.env.TWILIO_ACCOUNT_SID);
     User.find({sessions: {_id: req.params.id}}, function(err, foundInstructors) {
         res.render('class/new', {sessionId: req.params.id, classes: myObjects.classes,
                                 instructors: foundInstructors, dayOfWeek: myObjects.days});

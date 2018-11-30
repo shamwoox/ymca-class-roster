@@ -62,6 +62,7 @@ router.get('/:id/edit', middleware.isLoggedIn, function(req, res) {
   });
 });
 
+//Update session
 router.put('/:id', middleware.isLoggedIn, function(req, res) {
   var session = req.body.session;
   Session.findByIdAndUpdate(req.params.id, session,function(err, foundSession) {
@@ -74,6 +75,51 @@ router.put('/:id', middleware.isLoggedIn, function(req, res) {
   });
 });
 
+//Delete session
+router.delete('/:id', middleware.isLoggedIn, function(req, res) {
+  //Remove classes in the deleted session
+  Class.find({'session.id': req.params.id}, function(err, foundClasses) {
+    if(foundClasses.length <= 0) {
+      User.update({'sessions._id': req.params.id}, {$pull: {sessions: {_id: req.params.id}}}, function(err, deletedSession) {
+          if(err) {
+              console.log(err);
+          }
+      });
+    }
+    for(var i = 0; i < foundClasses.length; i++) {
+      // console.log(foundClasses[i]._id);
+      User.update({'sessions._id': req.params.id}, {$pull: {classes: {_id: foundClasses[i]._id}}}, function(err, deletedClasses) {
+          if(err) {
+              console.log(err);
+          } else {
+            //Remove session from instructors
+            User.update({'sessions._id': req.params.id}, {$pull: {sessions: {_id: req.params.id}}}, function(err, deletedSession) {
+                if(err) {
+                    console.log(err);
+                }
+            });
+          }
+      });
+    }
+
+  });
+  //Removes session from DB
+  Session.findByIdAndRemove(req.params.id, function(err) {
+    if(err) {
+      res.redirect('/session');
+    } else {
+      Class.deleteMany({'session.id': req.params.id}, function(err, deletedClasses) {
+        if(err) {
+          console.log(err);
+        } else {
+          req.flash('success', 'Session successfully deleted!');
+          res.redirect('/session');
+        }
+      });
+    }
+  });
+});
+
 //Show session's classes and instructors
 router.get('/:id', middleware.isLoggedIn, function(req, res) {
     Session.findById(req.params.id).exec(function(err, foundSession) {
@@ -82,7 +128,6 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
             res.redirect('/session');
         } else {
             Class.find({'session.id': req.params.id}, function(err, foundClasses) {
-              console.log("FOUND CLASSES: " + foundClasses);
                 res.render('session/show', {classes: foundClasses, session: foundSession,
                     instructors: foundSession.instructors});
             });
