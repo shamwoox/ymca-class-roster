@@ -21,6 +21,14 @@ var StudentSchema = new mongoose.Schema({
     ],
     skills: [
       {
+        name: {
+          "A / Water Discovery": {type: Boolean, default: false}
+        },
+        skills: [
+          {
+            "Blow bubbles on surface, assisted": {type: Boolean, default: false}
+          }
+        ]
       }
     ]
 });

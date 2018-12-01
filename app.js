@@ -12,7 +12,8 @@ var indexRoutes = require('./routes/index'),
     userRoutes = require('./routes/user'),
     studentRoutes = require('./routes/student'),
     sessionRoutes = require('./routes/session'),
-    classRoutes = require('./routes/class');
+    classRoutes = require('./routes/class'),
+    dayRoutes = require('./routes/day');
 
 mongoose.connect('mongodb://localhost/ymca', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
@@ -45,7 +46,8 @@ app.use("/", indexRoutes);
 app.use("/user", userRoutes);
 app.use("/students", studentRoutes);
 app.use("/session/:id/class", classRoutes);
-app.use("/session", sessionRoutes);
+app.use("/session", sessionRoutes),
+app.use("/session/:id/class/:class_id/day", dayRoutes);
 
 app.listen('5000', function() {
     console.log('Server running on port 5000');

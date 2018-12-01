@@ -1,7 +1,61 @@
 <% include ../partials/header %>
 
 <div class="container">
+    <% if(success && success.length > 0) { %>
+			<div class="alert alert-success" role="alert">
+				<%= success %>
+			</div>
+		<% } %>
+		<% if(error && error.length > 0) { %>
+			<div class="alert alert-danger" role="alert">
+				<%= error %>
+			</div>
+		<% } %>
   <h1><%= foundClass.levelName %></h1>
+  <h5>
+    Taught by:
+    <%= foundClass.instructor.firstName %> <%= foundClass.instructor.lastName %>
+  </h5>
+  <h6>
+    <%= foundClass.session.season %> <%= foundClass.session.year %>
+  </h6>
+  <h6>
+    <%= foundClass.dayOfWeek %> <%= foundClass.startTime %> - <%= foundClass.endTime %>
+  </h6>
+  <hr>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="card" style="width: 18rem;">
+      <h5 class="card-header">
+        Enrolled Students
+        <a href="/session/<%= foundClass.id %>/class/<%= foundClass._id %>/student/new"><i class="fas fa-user-plus float-right"></i></a>
+      </h5>
+      <ul class="list-group list-group-flush">
+        <% foundClass.students.forEach(function(student) { %>
+          <li class="list-group-item"><%= student.firstName %> <%= student.lastName %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="card" style="width: 100%; margin-left: 2%;">
+      <div class="card-body">
+        <h5 class="card-title">Classes</h5>
+        <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/new" class="btn btn-primary btn-sm">Add new day</a>
+        <hr>
+        <div class="card" style="width: 18rem;">
+          <h5 class="card-header">
+            10/12/2011
+          </h5>
+          <div class="card-body">
+            <p>Blow bubbles on surface, assisted</p>
+            <a href="#" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <% include ../partials/footer %>

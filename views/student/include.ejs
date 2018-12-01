@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="parent">
+        <div class="form" style="text-align: center;">
+			<div class="row">
+				<div class="shadow-lg p-3 mb-5 bg-white rounded">
+                    <form action="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/student", method="POST">
+                        <h2>Add students to this class</h2>
+                        <hr>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <select multiple class="form-control" name="new_students">
+                                    <% students.forEach(function(student) { %>
+                                        <option value="<%= student._id %>"><%= student.firstName %> <%= student.lastName %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>" class="btn btn-danger btn-sm">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

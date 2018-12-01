@@ -4,6 +4,7 @@ var express = require('express'),
     myObjects = require('../public/objects'),
     User = require('../models/user'),
     Class = require('../models/class'),
+    Student = require('../models/student'),
     router = express.Router({mergeParams: true});
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
@@ -88,5 +89,41 @@ router.get('/:class_id', middleware.isLoggedIn, function(req, res) {
         }
     });
 });
+
+//Show add-student-to-class form
+router.get('/:class_id/student/new', middleware.isLoggedIn, function(req, res) {
+    Student.find({'classes._id': {$ne: req.params.class_id}}, function(err, foundStudents) {
+        if(err) {
+            console.log(err);
+        } else {
+            Class.findById(req.params.class_id, function(err, foundClass) {
+                res.render('student/include', {students: foundStudents, foundClass: foundClass});
+            });
+        }
+    });
+});
+
+//Add student to class
+router.post('/:class_id/student', middleware.isLoggedIn, function(req, res) {
+    Class.findById(req.params.class_id, function(err, foundClass) {
+        if(err) {
+            console.log(err);
+        } else {
+            Student.findById(req.body.new_students, function(err, foundStudent) {
+                foundClass.students.firstName = foundStudent.firstName;
+                foundClass.students.lastName = foundStudent.lastName;
+                foundClass.students.push(foundStudent);
+                foundClass.save();
+
+                foundStudent.classes.levelName = foundClass.levelName;
+                foundStudent.classes.push(foundClass);
+                foundStudent.save();
+                req.flash('success', 'Successfully added student to class!');
+                res.redirect('/session/' + req.params.id + '/class/' + req.params.class_id);
+            });
+        }
+    });
+});
+
 
 module.exports = router;

@@ -138,7 +138,7 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
 //Show the add page for adding an instructor to a session
 router.get('/:id/instructor/new', middleware.isLoggedIn, function(req, res) {
     if(req.user.isAdmin) {
-        User.find({}, function(err, foundInstructors) {
+        User.find({'sessions._id': {$ne: req.params.id}}, function(err, foundInstructors) {
             if(err) {
                 console.log(err);
             } else {

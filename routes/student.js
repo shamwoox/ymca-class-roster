@@ -23,7 +23,7 @@ router.get('/new', middleware.isLoggedIn,function(req, res) {
         res.render('student/new', {months: myObjects.months, genders: myObjects.genders});
     } else {
         req.flash('error', "You don't have permission to add a new student!");
-        res.redirect('/students')
+        res.redirect('/students');
     }
 });
 
