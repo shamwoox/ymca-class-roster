@@ -14,28 +14,34 @@
 			<%= error %>
 		</div>
 	<% } %>
-  <div class="card bg-light mb-3" style="max-width: 18rem;">
-    <div class="card-header"><%= user.firstName %> <%= user.lastName %></div>
-    	<div class="card-body">
-				<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
-				<hr>
-				<p class="card-text"><i class="fas fa-envelope"></i> Email: <%= user.email %></p>
-				<p class="card-text"><i class="fas fa-phone"></i> Phone: <%= user.phone %></p>
-				<% if(user.isAdmin) { %>
-				<p class="card-text"><i class="fas fa-lock"></i> Account Type: Manager</p>
-				<% } else { %>
-				<p class="card-text"><i class="fas fa-lock-open"></i> Account Type: Instructor</p>
-				<% } %>
-				<% if(currentUser && currentUser._id.equals(user._id) || currentUser && currentUser.isAdmin) { %>
-				<a href="/user/<%= user._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
-				<% } %>
-				<% if(currentUser && currentUser.isAdmin) { %>
-					<form class="inline" action="/user/<%= user._id %>?_method=DELETE" method="POST">
-						<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
-					</form>
-				<% } %>
+
+	<div class="row">
+		<div class="card bg-light mb-3" style="max-width: 18rem;">
+			<div class="card-header">
+				<%= user.firstName %> <%= user.lastName %>
+			</div>
+				<div class="card-body">
+					<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
+					<hr>
+					<p class="card-text"><i class="fas fa-envelope"></i> Email: <%= user.email %></p>
+					<p class="card-text"><i class="fas fa-phone"></i> Phone: <%= user.phone %></p>
+					<% if(user.isAdmin) { %>
+					<p class="card-text"><i class="fas fa-lock"></i> Account Type: Manager</p>
+					<% } else { %>
+					<p class="card-text"><i class="fas fa-lock-open"></i> Account Type: Instructor</p>
+					<% } %>
+					<% if(currentUser && currentUser._id.equals(user._id) || currentUser && currentUser.isAdmin) { %>
+					<a href="/user/<%= user._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
+					<% } %>
+					<% if(currentUser && currentUser.isAdmin) { %>
+						<form class="inline" action="/user/<%= user._id %>?_method=DELETE" method="POST">
+							<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
+						</form>
+					<% } %>
+				</div>
 		</div>
-  </div>
+		
+	</div>
 </div>
 
 <% include ../partials/footer %>

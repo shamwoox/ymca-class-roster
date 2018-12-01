@@ -3,7 +3,8 @@ var express = require('express'),
     middleware = require('../middleware/index'),
     User = require('../models/user'),
     myObjects = require('../public/objects'),
-    myFunctions = require('../public/main');
+    myFunctions = require('../public/main'),
+    Class = require('../models/class'),
     router = express.Router();
 
 //Show all students
@@ -90,6 +91,13 @@ router.put('/:id', function(req, res) {
 
 //Destroy student
 router.delete('/:id', function(req, res) {
+    Class.updateMany({'students._id': req.params.id}, {$pull: {students: {_id: req.params.id}}}, function(err, updatedClasses) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log(updatedClasses);
+        }
+    });
     Student.findByIdAndRemove(req.params.id, function(err) {
         if(err) {
             res.redirect('/students');
@@ -98,6 +106,7 @@ router.delete('/:id', function(req, res) {
             res.redirect('/students');
         }
     });
+    Class.update()
 });
 
 module.exports = router;
