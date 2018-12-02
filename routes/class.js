@@ -5,6 +5,7 @@ var express = require('express'),
     User = require('../models/user'),
     Class = require('../models/class'),
     Student = require('../models/student'),
+    Day = require('../models/day'),
     router = express.Router({mergeParams: true});
 
 const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);

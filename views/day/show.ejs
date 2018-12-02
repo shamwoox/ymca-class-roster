@@ -1,0 +1,30 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <% if(success && success.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+            <%= success %>
+        </div>
+	<% } %>
+    <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= error %>
+        </div>
+    <% } %>
+
+    <h1><%= foundClass.levelName %></h1>
+    <h5>
+      Taught by:
+      <%= foundClass.instructor.firstName %> <%= foundClass.instructor.lastName %>
+    </h5>
+    <h6>
+      <%= foundClass.session.season %> <%= foundClass.session.year %>
+    </h6>
+    <h6>
+      <%= foundClass.dayOfWeek %> <%= foundClass.startTime %> - <%= foundClass.endTime %>
+    </h6>
+    <h4 style="text-align: center;"><%= day.date %></h4>
+    <hr>
+</div>
+
+<% include ../partials/footer %>

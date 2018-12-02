@@ -30,6 +30,16 @@ var ClassSchema = new mongoose.Schema({
             firstName: String,
             lastName: String
         }
+    ],
+    days: [
+        {
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Day"
+            },
+            date: String,
+            instructor: String
+        }
     ]
 });
 

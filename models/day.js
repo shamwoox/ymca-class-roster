@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var DaySchema = new mongoose.Schema({
   date: String,
+  time: String,
   topics: String,
   notes: String,
   next: String,
@@ -15,14 +16,7 @@ var DaySchema = new mongoose.Schema({
       lastName: String
     }
   ],
-  instructor: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    },
-    firstName: String,
-    lastName: String
-  },
+  instructor: String,
   skills: [
     {
       name: String,
