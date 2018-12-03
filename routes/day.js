@@ -54,15 +54,18 @@ router.get('/:day_id', middleware.isLoggedIn, function(req, res) {
             for(key in myObjects.classes) {
                 if(myObjects.classes[key].name === foundClass.levelName) {
                     var presentStudents = [];
-                    
-                    for(var i = 0; i < foundClass.students.length; i++) {
-                        if(foundDay.students.indexOf(foundClass.students[i]._id) > -1) {
-                            presentStudents.push(foundClass.students[i]._id);
+                    if(foundClass.students == null || foundClass.students == undefined) {
+                        console.log(foundClass.students);
+                    } else {
+                        for(var i = 0; i < foundClass.students.length; i++) {
+                            if(foundDay.students.indexOf(foundClass.students[i]._id) > -1) {
+                                presentStudents.push(foundClass.students[i]._id);
+                            }
                         }
+                        res.render('day/show', {skills: myObjects.classes[key].skills, foundClass: foundClass, day: foundDay,
+                            presentStudents: presentStudents
+                        });
                     }
-                    res.render('day/show', {skills: myObjects.classes[key].skills, foundClass: foundClass, day: foundDay,
-                        presentStudents: presentStudents
-                    });
                 }
             }
         });
@@ -71,15 +74,12 @@ router.get('/:day_id', middleware.isLoggedIn, function(req, res) {
 
 //Save/Update day
 router.put('/:day_id', function(req, res) {
-
-    var keys = Object.keys(req.body.skills);
-
-    for(var i = 0; i < req.body.skills.length; i++) {
-        if(req.body.skills.hasOwnProperty(i)) {
-            var value1 = req.body.skills[i];
-            console.log(value1);
-        }
+    var skills = req.body.skills;
+    if(skills === undefined) {
+        skills = {}
+        console.log(skills);
     }
+    var keys = Object.keys(skills);
     var studentIds = new Set();
     for(var i = 0; i < keys.length; i++) {
         studentIds.add(keys[i].substring(0, 24));
@@ -92,13 +92,17 @@ router.put('/:day_id', function(req, res) {
             for(var i = 0; i < foundStudents.length; i++) {
                 for(var j = 0; j < keys.length; j++) {
                     if(foundStudents[i]._id == keys[j].substring(0, 24)) {
-                        // console.log(foundStudents[i].firstName + " has this skill: " + keys[j].substring(25, keys[j].length));
                         var status = req.body.skills[keys[j]];
-                        var blah = {
+                        var skillObj = {
                             name: keys[j].substring(25, keys[j].length),
                             status: status
                         }
-                        Student.findByIdAndUpdate(foundStudents[i]._id, {$addToSet: {skills: blah}},function(err, foundStudent) {
+                        Student.findByIdAndUpdate(foundStudents[i]._id, {$addToSet: {skills: skillObj}},function(err, foundStudent) {
+                            if(err) {
+                                console.log(err);
+                            }
+                        });
+                        Student.findByIdAndUpdate(foundStudents[i]._id, {$set: {skills: {status: status}}},function(err, foundStudent) {
                             if(err) {
                                 console.log(err);
                             }
@@ -108,8 +112,12 @@ router.put('/:day_id', function(req, res) {
             }
         } 
     });
-
-    Day.findByIdAndUpdate(req.params.day_id, {$set: {students: req.body.students, notes: req.body.notes}}, function(err, foundDay) {
+    var arr = req.body.students;
+    if(arr === undefined) {
+        arr = {}
+        console.log(arr);
+    }
+    Day.findByIdAndUpdate(req.params.day_id, {$set: {students: arr, notes: req.body.notes}}, function(err, foundDay) {
         if(err) {
             console.log(err);
         } else {
