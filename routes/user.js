@@ -1,7 +1,8 @@
 var express = require('express'),
     User = require('../models/user'),
     middleware = require('../middleware/index'),
-    myFunctions = require('../public/main');
+    myFunctions = require('../public/main'),
+    Class = require('../models/class'),
     router = express.Router();
 
 //List all instructors
@@ -21,7 +22,9 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
         if(err || !foundUser){
             res.send("User not found");
         } else {
-            res.render("user/show", {user: foundUser});
+            Class.find({'instructor.id': req.params.id}, function(err, foundClasses) {
+                res.render("user/show", {user: foundUser, foundClasses: foundClasses});
+            });
         }
     });
 });

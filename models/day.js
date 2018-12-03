@@ -7,21 +7,9 @@ var DaySchema = new mongoose.Schema({
   notes: String,
   next: String,
   students: [
-    {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Student",
-      },
-      firstName: String,
-      lastName: String
-    }
   ],
   instructor: String,
-  skills: [
-    {
-      name: String,
-    }
-  ]
+  skills:{}
 });
 
 module.exports = mongoose.model("Day", DaySchema);

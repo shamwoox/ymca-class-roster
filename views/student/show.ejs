@@ -15,7 +15,7 @@
 		</div>
 	<% } %>
 	<div class="row">
-		<div class="col-md-5">
+		<div class="col-md-4">
 				<div class="card bg-light mb-3" style="max-width: 18rem;">
 						<div class="card-header">
 							<%= student.firstName %> 
@@ -51,38 +51,33 @@
 						</div>
 					</div>
 		</div>
-		<div class="col-md-7">
-				<canvas id="myChart"></canvas>
+		<div class="col-md-8">
+			<div class="card" style="width: 100%;">
+				<h4 class="card-header">
+					Completed Skills
+				</h4>
+				<ul class="list-group list-group-flush">
+					<% student.skills.forEach(function(skill) { %>
+						<% if(skill.status == "1") { %>
+							<li class="list-group-item"><%= skill.name %></li>
+						<% } %>
+					<% }) %>
+				</ul>
+			</div>
+			<div class="card" style="width: 100%;">
+					<h4 class="card-header">
+						Taught, but yet acheived
+					</h4>
+					<ul class="list-group list-group-flush">
+						<% student.skills.forEach(function(skill) { %>
+							<% if(skill.status == "0") { %>
+								<li class="list-group-item"><%= skill.name %></li>
+							<% } %>
+						<% }) %>
+					</ul>
+				</div>
 		</div>
 	</div>
 </div>
-
-<script>
-	var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-
-    // The data for our dataset
-    data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    },
-
-    // Configuration options go here
-    options: {
-			title: {
-				display: true,
-				text: 'Yearly progress'
-			}
-		}
-});
-</script>
-
 
 <% include ../partials/footer %>

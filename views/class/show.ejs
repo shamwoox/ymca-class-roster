@@ -29,7 +29,9 @@
     <div class="card" style="width: 18rem;">
       <h5 class="card-header">
         Enrolled Students
+        <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
         <a href="/session/<%= foundClass.id %>/class/<%= foundClass._id %>/student/new"><i class="fas fa-user-plus float-right"></i></a>
+        <% } %>
       </h5>
       <ul class="list-group list-group-flush">
         <% foundClass.students.forEach(function(student) { %>
@@ -42,7 +44,9 @@
     <div class="card" style="width: 100%; margin-left: 2%;">
       <div class="card-body">
         <h5 class="card-title">Days</h5>
+        <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
         <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/new" class="btn btn-primary btn-sm">Add new day</a>
+        <% } %>
         <hr>
         <div class="row text-center" style="display:flex; flex-wrap: wrap;">
           <% foundClass.days.forEach(function(day) { %>
@@ -53,8 +57,12 @@
               <div class="card-body">
                 <p><%= day.instructor %></p>
                 <hr>
-                <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>" class="btn btn-primary btn-sm">View</a>
-                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>" class="btn btn-primary btn-sm float-left">View</a>
+                <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
+                <form class="inline" action="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</button>
+                </form>
+                <% } %>
               </div>
             </div>
           <% }) %>
