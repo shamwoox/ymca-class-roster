@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<div class="container">
+<div class="container animated fadeIn">
     <% if(success && success.length > 0) { %>
         <div class="alert alert-success" role="alert">
             <%= success %>
@@ -45,10 +45,10 @@
             </div>
         <% }) %>
         <hr>
-        <p>✗ = Not achieved</p>
+        <p>✗ = Not taught</p>
         <p>≈ = Taught but yet achieved</p>
-        <p>✓ = Achieved</p>
-        <table class="table table-striped table-bordered table-hover">
+        <p>✓= Achieved</p>
+        <table class="table table-striped table-bordered table-hover" style="margin-bottom: 3%;">
             <thead>
                 <tr>
                     <th scope="col">Skills</th>
@@ -130,6 +130,88 @@
                 <% }) %>
             </tbody>
         </table>
+        <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Topics</th>
+                        <% foundClass.students.forEach(function(student) { %>
+                        <th scope="col"><%= student.firstName %> <%= student.lastName %></th>
+                        <% }) %>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% topics.forEach(function(topic) { %>
+                        <tr>
+                            <th scope="row"><%= topic %></th>
+                            <% for(var i = 0; i < foundClass.students.length; i++) { %>
+                                <% var keyTopic = foundClass.students[i]._id + '.' + topic %>
+                                
+                                <% if(day.topics[keyTopic] === '-1') { %>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required checked>
+                                            <label class="form-check-label" for="inlineRadio1">✗</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0">
+                                            <label class="form-check-label" for="inlineRadio2">≈</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1">
+                                            <label class="form-check-label" for="inlineRadio3">✓</label>
+                                        </div>
+                                    </td>
+                                <% } else if(day.topics[keyTopic] === '0') { %>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required>
+                                            <label class="form-check-label" for="inlineRadio1">✗</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0" checked>
+                                            <label class="form-check-label" for="inlineRadio2">≈</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1">
+                                            <label class="form-check-label" for="inlineRadio3">✓</label>
+                                        </div>
+                                    </td>
+                                <% } else if(day.topics[keyTopic] === '1') { %>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required>
+                                            <label class="form-check-label" for="inlineRadio1">✗</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0">
+                                            <label class="form-check-label" for="inlineRadio2">≈</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1" checked>
+                                            <label class="form-check-label" for="inlineRadio3">✓</label>
+                                        </div>
+                                    </td>
+                                <% } else { %>
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required>
+                                            <label class="form-check-label" for="inlineRadio1">✗</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0">
+                                            <label class="form-check-label" for="inlineRadio2">≈</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1">
+                                            <label class="form-check-label" for="inlineRadio3">✓</label>
+                                        </div>
+                                    </td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
         <hr>
         <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
         <h4>Additional Notes</h4>

@@ -65,8 +65,11 @@ router.get('/:day_id', middleware.isLoggedIn, function(req, res) {
                         if(foundDay.skills === undefined) {
                             foundDay.skills = {};
                         }
+                        if(foundDay.topics === undefined) {
+                            foundDay.topics = {};
+                        }
                         res.render('day/show', {skills: myObjects.classes[key].skills, foundClass: foundClass, day: foundDay,
-                            presentStudents: presentStudents
+                            presentStudents: presentStudents, topics: myObjects.classes[key].topics
                         });
                     }
                 }
@@ -127,7 +130,7 @@ router.put('/:day_id', function(req, res) {
         arr = {};
     }
  
-    Day.findByIdAndUpdate(req.params.day_id, {$set: {students: arr, notes: req.body.notes, skills: req.body.skills}}, function(err, foundDay) {
+    Day.findByIdAndUpdate(req.params.day_id, {$set: {students: arr, notes: req.body.notes, skills: req.body.skills, topics: req.body.topics}}, function(err, foundDay) {
         if(err) {
             console.log(err);
         } else {

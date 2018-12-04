@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<div class="container">
+<div class="container animated fadeIn">
     <% if(success && success.length > 0) { %>
 			<div class="alert alert-success" role="alert">
 				<%= success %>
@@ -45,7 +45,10 @@
       <div class="card-body">
         <h5 class="card-title">Days</h5>
         <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
-        <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/new" class="btn btn-primary btn-sm">Add new day</a>
+        <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/new" class="btn btn-primary btn-sm">
+          <i class="fas fa-plus"></i> 
+          Add new day
+        </a>
         <% } %>
         <hr>
         <div class="row text-center" style="display:flex; flex-wrap: wrap;">
@@ -57,10 +60,13 @@
               <div class="card-body">
                 <p><%= day.instructor %></p>
                 <hr>
-                <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>" class="btn btn-primary btn-sm float-left">View</a>
+                <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>" class="btn btn-primary btn-sm float-left">
+                  <i class="fas fa-eye"></i> 
+                  View
+                </a>
                 <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
                 <form class="inline" action="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>?_method=DELETE" method="POST">
-                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i>Delete</button>
+                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
                 </form>
                 <% } %>
               </div>

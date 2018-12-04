@@ -9,7 +9,8 @@ var DaySchema = new mongoose.Schema({
   students: [
   ],
   instructor: String,
-  skills:{}
+  skills:{},
+  topics:{}
 });
 
 module.exports = mongoose.model("Day", DaySchema);

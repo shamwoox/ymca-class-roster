@@ -1,9 +1,18 @@
+
 .form {
   display: inline-block;
 }
 
 form.inline {
   float:right;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+}
+
+p {
+  font-family: 'PT Sans', sans-serif;
 }
 
 .parent {
@@ -63,3 +72,8 @@ a, a:hover {
 .agenda:hover {
   background-color: #B3B3B3;
 }
+
+.list-group-item:hover {
+  background-color:  #B3B3B3;
+}
+
