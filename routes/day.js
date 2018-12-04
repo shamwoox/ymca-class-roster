@@ -62,6 +62,9 @@ router.get('/:day_id', middleware.isLoggedIn, function(req, res) {
                                 presentStudents.push(foundClass.students[i]._id);
                             }
                         }
+                        if(foundDay.skills === undefined) {
+                            foundDay.skills = {};
+                        }
                         res.render('day/show', {skills: myObjects.classes[key].skills, foundClass: foundClass, day: foundDay,
                             presentStudents: presentStudents
                         });
@@ -121,10 +124,10 @@ router.put('/:day_id', function(req, res) {
     });
     var arr = req.body.students;
     if(arr === undefined) {
-        arr = {}
-        console.log(arr);
+        arr = {};
     }
-    Day.findByIdAndUpdate(req.params.day_id, {$set: {students: arr, notes: req.body.notes}}, function(err, foundDay) {
+ 
+    Day.findByIdAndUpdate(req.params.day_id, {$set: {students: arr, notes: req.body.notes, skills: req.body.skills}}, function(err, foundDay) {
         if(err) {
             console.log(err);
         } else {
