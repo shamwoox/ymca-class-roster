@@ -76,6 +76,43 @@ router.get('/:id/edit', function(req, res) {
     });
 });
 
+//Get student edit skills form
+router.get('/:id/editskills', function(req, res) {
+    Student.findById(req.params.id, function(err, foundStudent) {
+        if(err) {
+            res.redirect('/');
+        } else {
+            if(req.user.isAdmin) {
+                if(foundStudent.skills === undefined) {
+                    foundStudent.skills = {};
+                }
+                res.render('student/editSkills', {foundStudent: foundStudent, classes: myObjects.classes});
+            } else {
+                req.flash('error', "You don't have permission to edit students' skills!");
+                res.redirect('/students/' + req.params.id);
+            }
+        }
+    });
+});
+
+//Update student skills
+router.put('/:id/editskills', function(req, res) {
+    var skillsArr = req.body.skills;
+    if(skillsArr === undefined) {
+        skillsArr = {};
+    }
+    Student.findByIdAndUpdate(req.params.id, {$set: {skills: skillsArr}}, function(err, updatedStudent) {
+        if(err) {
+            console.log(err);
+            req.flash('error', 'An error has occured');
+            res.redirect('/students/' + req.params.id + '/editskills');
+        } else {
+            req.flash('success', 'Successfuly saved student skills!');
+            res.redirect('/students/' + req.params.id + '/editskills');
+        }
+    })
+});
+
 //UPDATE student
 router.put('/:id', function(req, res) {
     var student = req.body.student;

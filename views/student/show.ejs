@@ -48,6 +48,9 @@
 									<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
 								</form>
 							<% } %>
+							<% if(currentUser && currentUser.isAdmin) { %>
+							<a href="/students/<%= student._id %>/editskills" class="btn btn-warning btn-sm" style="margin-top: 3%;"><i class="far fa-edit"></i> Edit Skills Checklist</a>
+							<% } %>
 						</div>
 					</div>
 		</div>
@@ -57,25 +60,25 @@
 					Completed Skills
 				</h4>
 				<ul class="list-group list-group-flush">
-					<% student.skills.forEach(function(skill) { %>
-						<% if(skill.status == "1") { %>
-							<li class="list-group-item"><%= skill.name %></li>
+					<% for(keys in student.skills) { %>
+						<% if(student.skills[keys] === '1') { %>
+							<li class="list-group-item"><%= keys.substring(25, keys.length - 1) %></li>
 						<% } %>
-					<% }) %>
+					<% } %>
 				</ul>
 			</div>
 			<div class="card" style="width: 100%;">
-					<h4 class="card-header">
-						Taught, but yet acheived
-					</h4>
-					<ul class="list-group list-group-flush">
-						<% student.skills.forEach(function(skill) { %>
-							<% if(skill.status == "0") { %>
-								<li class="list-group-item"><%= skill.name %></li>
-							<% } %>
-						<% }) %>
-					</ul>
-				</div>
+				<h4 class="card-header">
+					Taught, but yet acheived
+				</h4>
+				<ul class="list-group list-group-flush">
+					<% for(keys in student.skills) { %>
+						<% if(student.skills[keys] === '0') { %>
+							<li class="list-group-item"><%= keys.substring(25, keys.length - 1) %></li>
+						<% } %>
+					<% } %>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>

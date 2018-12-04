@@ -21,7 +21,7 @@ var StudentSchema = new mongoose.Schema({
         year: String
       }
     ],
-    skills: []
+    skills: {}
 });
 
 module.exports = mongoose.model("Student", StudentSchema);
