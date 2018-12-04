@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+// var skillSet = new Set();
+
 var StudentSchema = new mongoose.Schema({
     firstName: String,
     middleName: String,
@@ -19,8 +21,7 @@ var StudentSchema = new mongoose.Schema({
         year: String
       }
     ],
-    skills: [
-    ]
+    skills: []
 });
 
 module.exports = mongoose.model("Student", StudentSchema);

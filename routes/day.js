@@ -93,16 +93,23 @@ router.put('/:day_id', function(req, res) {
                 for(var j = 0; j < keys.length; j++) {
                     if(foundStudents[i]._id == keys[j].substring(0, 24)) {
                         var status = req.body.skills[keys[j]];
+                        
                         var skillObj = {
                             name: keys[j].substring(25, keys[j].length),
-                            status: status
                         }
                         Student.findByIdAndUpdate(foundStudents[i]._id, {$addToSet: {skills: skillObj}},function(err, foundStudent) {
                             if(err) {
                                 console.log(err);
                             }
                         });
-                        Student.findByIdAndUpdate(foundStudents[i]._id, {$set: {skills: {status: status}}},function(err, foundStudent) {
+                        var skillObj2 = {
+                            name: keys[j].substring(25, keys[j].length),
+                            status: status
+                        }
+                        var index = 'skills.' + String(j);
+                        index = String(index);
+
+                        Student.findByIdAndUpdate(foundStudents[i]._id, {$set: {[index]: skillObj2}}, function(err, foundStudent) {
                             if(err) {
                                 console.log(err);
                             }
