@@ -80,51 +80,6 @@ router.get('/:day_id', middleware.isLoggedIn, function(req, res) {
 
 //Save/Update day
 router.put('/:day_id', function(req, res) {
-    // var skills = req.body.skills;
-    // if(skills === undefined) {
-    //     skills = {}
-    //     console.log(skills);
-    // }
-    // var keys = Object.keys(skills);
-    // var studentIds = new Set();
-    // for(var i = 0; i < keys.length; i++) {
-    //     studentIds.add(keys[i].substring(0, 24));
-    // }
-    // studentIds = Array.from(studentIds);
-    // Student.find({_id: {$in: studentIds}}, function(err, foundStudents) {
-    //     if(err) {
-    //         console.log(err);
-    //     } else {
-    //         for(var i = 0; i < foundStudents.length; i++) {
-    //             for(var j = 0; j < keys.length; j++) {
-    //                 if(foundStudents[i]._id == keys[j].substring(0, 24)) {
-    //                     var status = req.body.skills[keys[j]];
-                        
-    //                     var skillObj = {
-    //                         name: keys[j].substring(25, keys[j].length),
-    //                     }
-    //                     Student.findByIdAndUpdate(foundStudents[i]._id, {$addToSet: {skills: skillObj}},function(err, foundStudent) {
-    //                         if(err) {
-    //                             console.log(err);
-    //                         }
-    //                     });
-    //                     var skillObj2 = {
-    //                         name: keys[j].substring(25, keys[j].length),
-    //                         status: status
-    //                     }
-    //                     var index = 'skills.' + String(j);
-    //                     index = String(index);
-
-    //                     Student.findByIdAndUpdate(foundStudents[i]._id, {$set: {[index]: skillObj2}}, function(err, foundStudent) {
-    //                         if(err) {
-    //                             console.log(err);
-    //                         }
-    //                     });
-    //                 }
-    //             }
-    //         }
-    //     } 
-    // });
     var arr = req.body.students;
     if(arr === undefined) {
         arr = {};

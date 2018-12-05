@@ -77,7 +77,7 @@ router.get('/:id/edit', function(req, res) {
 });
 
 //Get student edit skills form
-router.get('/:id/editskills', function(req, res) {
+router.get('/:id/editskills', middleware.isLoggedIn, function(req, res) {
     Student.findById(req.params.id, function(err, foundStudent) {
         if(err) {
             res.redirect('/');
@@ -96,21 +96,26 @@ router.get('/:id/editskills', function(req, res) {
 });
 
 //Update student skills
-router.put('/:id/editskills', function(req, res) {
-    var skillsArr = req.body.skills;
-    if(skillsArr === undefined) {
-        skillsArr = {};
-    }
-    Student.findByIdAndUpdate(req.params.id, {$set: {skills: skillsArr}}, function(err, updatedStudent) {
-        if(err) {
-            console.log(err);
-            req.flash('error', 'An error has occured');
-            res.redirect('/students/' + req.params.id + '/editskills');
-        } else {
-            req.flash('success', 'Successfuly saved student skills!');
-            res.redirect('/students/' + req.params.id + '/editskills');
+router.put('/:id/editskills', middleware.isLoggedIn,function(req, res) {
+    if(req.user.isAdmin) {
+        var skillsArr = req.body.skills;
+        if(skillsArr === undefined) {
+            skillsArr = {};
         }
-    })
+        Student.findByIdAndUpdate(req.params.id, {$set: {skills: skillsArr}}, function(err, updatedStudent) {
+            if(err) {
+                console.log(err);
+                req.flash('error', 'An error has occured');
+                res.redirect('/students/' + req.params.id + '/editskills');
+            } else {
+                req.flash('success', 'Successfuly saved student skills!');
+                res.redirect('/students/' + req.params.id + '/editskills');
+            }
+        })
+    } else {
+        req.flash('error', "You don't have permission to edit skills.");
+        res.redirect('/students/' + req.params.id);
+    }
 });
 
 //UPDATE student

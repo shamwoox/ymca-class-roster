@@ -36,11 +36,11 @@
                 <% } %>
                 <ul class="list-group list-group-flush">
                     <% for(let i = 0; i < classes.length; i++) { %>
-                        <li class="list-group-item">
-                          <a href="/session/<%= session._id %>/class/<%= classes[i]._id %>">
-                            <%= classes[i].levelName %>
-                          </a>
-                        </li>
+                        <a href="/session/<%= session._id %>/class/<%= classes[i]._id %>">
+                            <li class="list-group-item">
+                                <%= classes[i].levelName %>
+                            </li>
+                        </a>
                     <% } %>
                 </ul>
             </div>
@@ -58,16 +58,18 @@
                 <% } %>
                 <ul class="list-group list-group-flush">
                     <% instructors.forEach(function(instructor) { %>
-                        <li class="list-group-item">
-                            <a href="/user/<%= instructor._id %>"><%= instructor.firstName %> <%= instructor.lastName %></a>
-                            <% if(currentUser && currentUser.isAdmin) { %>
-                                <form class="inline" action="/session/<%= session._id %>/instructor/<%= instructor._id %>?_method=PUT" method="POST">
-                                    <button type="submit" class="float-right btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstructor">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            <% } %>
-                        </li>
+                        <a href="/user/<%= instructor._id %>">
+                            <li class="list-group-item">
+                                <%= instructor.firstName %> <%= instructor.lastName %>
+                                <% if(currentUser && currentUser.isAdmin) { %>
+                                    <form class="inline" action="/session/<%= session._id %>/instructor/<%= instructor._id %>?_method=PUT" method="POST">
+                                        <button type="submit" class="float-right btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteInstructor">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                <% } %>
+                            </li>
+                        </a>
                     <% }) %>
                 </ul>
             </div>

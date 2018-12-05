@@ -35,7 +35,9 @@
       </h5>
       <ul class="list-group list-group-flush">
         <% foundClass.students.forEach(function(student) { %>
-          <li class="list-group-item"><%= student.firstName %> <%= student.lastName %></li>
+          <a href="/students/<%= student._id %>">
+            <li class="list-group-item"><%= student.firstName %> <%= student.lastName %></li>
+          </a>
         <% }) %>
       </ul>
     </div>
@@ -52,20 +54,21 @@
         <% } %>
         <hr>
         <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-          <% foundClass.days.forEach(function(day) { %>
+          <% foundClass.days.forEach(function(classDay) { %>
             <div class="card" style="width: 14rem; margin-left: 5%; margin-bottom: 5%;">
               <h5 class="card-header">
-                <%= day.date %>
+                <%= classDay.date %>
               </h5>
               <div class="card-body">
-                <p><%= day.instructor %></p>
+                <p><%= classDay.instructor %></p>
+                
                 <hr>
-                <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>" class="btn btn-primary btn-sm float-left">
+                <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= classDay._id %>" class="btn btn-primary btn-sm float-left">
                   <i class="fas fa-eye"></i> 
                   View
                 </a>
                 <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
-                <form class="inline" action="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= day._id %>?_method=DELETE" method="POST">
+                <form class="inline" action="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/<%= classDay._id %>?_method=DELETE" method="POST">
                     <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
                 </form>
                 <% } %>

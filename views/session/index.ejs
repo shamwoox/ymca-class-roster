@@ -22,11 +22,13 @@
         <div class="col-md-6">
             <div class="card" style="width: 18rem;">
                 <ul class="list-group list-group-flush">
-                  <% sessions.forEach(function(session) { %>
-										<li class="list-group-item">
-											<a href="/session/<%= session._id %>"><%= session.season %> <%= session.year %> </a>
-										</li>
-									<% }) %>
+					<% sessions.forEach(function(session) { %>
+						<a href="/session/<%= session._id %>">
+							<li class="list-group-item">
+								<%= session.season %> <%= session.year %>
+							</li>
+						</a>
+					<% }) %>
                 </ul>
             </div>
         </div>

@@ -17,12 +17,13 @@
 	<div class="row">
 		<div class="col-md-4">
 				<div class="card bg-light mb-3" style="max-width: 18rem;">
-						<div class="card-header">
+						<h4 class="card-header">
 							<%= student.firstName %> 
 							<% if(student.middleName.length > 0) { %>
 								<%= student.middleName %>.
 							<% } %>
-							 <%= student.lastName %></div>
+							 <%= student.lastName %>
+							</h4>
 							<div class="card-body">
 							<h5 class="card-title"><Light card title><i class="fas fa-user"></i> Personal Information</h5>
 							<hr>
@@ -55,19 +56,19 @@
 					</div>
 		</div>
 		<div class="col-md-8">
-			<div class="card" style="width: 100%;">
+			<div class="card" style="width: 100%; margin-bottom: 3%;">
 				<h4 class="card-header">
 					Completed Skills
 				</h4>
 				<ul class="list-group list-group-flush">
 					<% for(keys in student.skills) { %>
 						<% if(student.skills[keys] === '1') { %>
-							<li class="list-group-item"><%= keys.substring(25, keys.length - 1) %></li>
+							<li class="list-group-item"><%= keys.substring(25, keys.length) %></li>
 						<% } %>
 					<% } %>
 				</ul>
 			</div>
-			<div class="card" style="width: 100%;">
+			<div class="card" style="width: 100%; margin-bottom: 3%;">
 				<h4 class="card-header">
 					Taught, but yet acheived
 				</h4>

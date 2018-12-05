@@ -20,7 +20,9 @@
 	<br>
 	<ul class="list-group" id="instructors">
 		<% instructors.forEach(function(instructor) { %>
-			<li class="list-group-item"><a href="/user/<%= instructor._id %>"><%= instructor.firstName %> <%= instructor.lastName %></a></li>
+			<a href="/user/<%= instructor._id %>">
+				<li class="list-group-item"><%= instructor.firstName %> <%= instructor.lastName %></li>
+			</a>
 		<% }) %>
 	</ul>  
 </div>
