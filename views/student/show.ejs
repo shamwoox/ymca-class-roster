@@ -45,9 +45,13 @@
 							<a href="/students/<%= student._id %>/edit" class="btn btn-warning btn-sm"><i class="far fa-edit"></i> Edit Info</a>
 							<% } %>
 							<% if(currentUser && currentUser.isAdmin) { %>
-								<form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+								<!-- <form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
 									<button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
-								</form>
+								</form> -->
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-danger btn-sm float-right" data-toggle="modal" data-target="#deleteModal">
+									<i class="fas fa-trash-alt"></i> Delete
+								</button>
 							<% } %>
 							<% if(currentUser && currentUser.isAdmin) { %>
 							<a href="/students/<%= student._id %>/editskills" class="btn btn-warning btn-sm" style="margin-top: 3%;"><i class="far fa-edit"></i> Edit Skills Checklist</a>
@@ -83,4 +87,33 @@
 		</div>
 	</div>
 </div>
+
+
+	  
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalCenterTitle">Student Delete</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		<div class="modal-body">
+			Are you sure you want to delete this student?
+		</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+					<button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
+	<button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+</form> -->
 <% include ../partials/footer %>
