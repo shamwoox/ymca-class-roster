@@ -49,7 +49,6 @@ router.get('/:id/edit',function(req, res) {
 router.put('/:id', function(req, res) {
     var user = req.body.user;
     user.phone = myFunctions.formatPhoneNumber(user.phone);
-
     User.findByIdAndUpdate(req.params.id, user, function(err, updatedUser) {
         if(err) {
             res.redirect('/user/' + req.params.id +'/edit');

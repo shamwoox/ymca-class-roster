@@ -11,10 +11,10 @@
 				<%= error %>
 			</div>
 		<% } %>
-  <h1><%= foundClass.levelName %></h1>
-  <h5>
+  <h1><i class="fas fa-swimmer"></i> <%= foundClass.levelName %></h1>
+  <h5> 
     Taught by:
-    <%= foundClass.instructor.firstName %> <%= foundClass.instructor.lastName %>
+    <%= foundClass.instructor.firstName %> <%= foundClass.instructor.lastName %> 
   </h5>
   <h6>
     <%= foundClass.session.season %> <%= foundClass.session.year %>
@@ -45,7 +45,7 @@
   <div class="col-md-9">
     <div class="card" style="width: 100%; margin-left: 2%;">
       <div class="card-body">
-        <h5 class="card-title">Days</h5>
+        <h5 class="card-title"><i class="fas fa-calendar-alt"></i> Days</h5>
         <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
         <a href="/session/<%= foundClass.session.id %>/class/<%= foundClass._id %>/day/new" class="btn btn-primary btn-sm">
           <i class="fas fa-plus"></i> 

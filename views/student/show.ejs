@@ -60,6 +60,11 @@
 					</div>
 		</div>
 		<div class="col-md-8">
+			<h4><i class="fas fa-chart-pie"></i> Overall Skills Chart</h4>
+			<hr>
+			<canvas id="myChart" style="position: relative; height:40vh; width:80vw"></canvas>
+			<hr>
+			<h4><i class="fas fa-bars"></i> List of Skills</h4>
 			<div class="card" style="width: 100%; margin-bottom: 3%;">
 				<h4 class="card-header">
 					Completed Skills
@@ -104,7 +109,7 @@
 			Are you sure you want to delete this student?
 		</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times fa-lg"></i> Close</button>
 				<form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
 					<button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
 				</form>
@@ -113,7 +118,32 @@
 	</div>
 </div>
 
-<!-- <form class="inline" action="/students/<%= student._id %>?_method=DELETE" method="POST">
-	<button class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
-</form> -->
+<p id="achieved" hidden><%= mastered %></p>
+<p id="notAchieved" hidden><%= notMastered %></p>
+<p id="notTaught" hidden><%= notTaught %></p>
+
+<script>
+	var achieved = document.getElementById('achieved').innerHTML;
+	achieved = parseInt(achieved, 10);
+	var notAchieved = document.getElementById('notAchieved').innerHTML;
+	notAchieved = parseInt(notAchieved, 10);
+	var notTaught = document.getElementById('notTaught').innerHTML;
+	notTaught = parseInt(notTaught, 10);
+
+	var ctx = document.getElementById("myChart");
+	var myDoughnutChart = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: ['Achieved', 'Taught, but yet achieved', 'Not taught'],
+			datasets: [
+				{
+					label: 'skills',
+					backgroundColor: ['#F98866', '#FF420E', '#80BD9E'],
+					data: [achieved, notAchieved, notTaught]
+				}
+			]
+		}
+	});
+</script>
+
 <% include ../partials/footer %>

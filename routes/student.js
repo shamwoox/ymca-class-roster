@@ -55,7 +55,20 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
             req.flash('error', 'Student not found');
             res.redirect('/students');
         } else {
-            res.render('student/show', {student: foundStudent})
+            var mastered = 0;
+            var notMastered = 0;
+            var notTaught = 0;
+            for(keys in foundStudent.skills) {
+                if(foundStudent.skills[keys] === '1') {
+                    mastered++;
+                } else if (foundStudent.skills[keys] === '0') {
+                    notMastered++;
+                } else {
+                    notTaught++;
+                }
+            }
+            res.render('student/show', {student: foundStudent, mastered: mastered, notMastered: notMastered,
+                 notTaught: notTaught});
         }
     });
 });

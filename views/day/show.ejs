@@ -217,6 +217,10 @@
         <h4>Additional Notes</h4>
         <input type="text" name="notes" class="form-control" value="<%= day.notes %>">
         <hr>
+        <% } else { %>
+        <h4>Additional Notes</h4>
+            <input type="text" name="notes" class="form-control" value="<%= day.notes %>" disabled>
+        <hr>
         <% } %>
         <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
         <button type="submit" class="btn btn-primary btn-sm" style="margin-bottom: 5%;">Save</button>

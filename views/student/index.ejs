@@ -1,5 +1,4 @@
 <% include ../partials/header %>
-
 <div class="container w-25 col-auto animated fadeIn" style="text-align: center;">
 	<% if(success && success.length > 0) { %>
 		<div class="alert alert-success" role="alert">
@@ -15,7 +14,7 @@
 	<p>Type student name:</p>
 
 	<div class="input-group">
-		<input type="text" class="form-control" id="myInput">
+		<input type="text" class="form-control" id="myInput" onkeyup="myFunction()">
 		<div class="input-group-append">
 			<span class="input-group-text"><i class="fas fa-search"></i></span>
 		</div>
@@ -23,8 +22,7 @@
 		<a href="/students/new" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></a>
 		<% } %>
 	</div>
-
-	<!-- <input class="form-control" id="myInput" type="text" placeholder="Search.."> -->
+	
 	<br>
 	<ul class="list-group" id="students">
 		<% students.forEach(function(student) { %>
@@ -35,15 +33,5 @@
 	</ul>
 </div>
 
-<script>
-	$(document).ready(function(){
-		$("#myInput").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$("#students li").filter(function() {
-				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-			});
-		});
-	});
-</script>
 
 <% include ../partials/footer %>
