@@ -53,14 +53,14 @@ myObjects.classes = [
             "Wall grab assisted"
         ],
         topics: [
-            "A.1 Ask permission",
-            "A.2 Swim attire",
-            "A.3 Safe swim area",
-            "A.4 Lifeguards",
-            "A.5 Drowning",
-            "A.6 Life jackets",
-            "A.7 Rescue breathing",
-            "A.8 Backyard pools"
+            "A_1 Ask permission",
+            "A_2 Swim attire",
+            "A_3 Safe swim area",
+            "A_4 Lifeguards",
+            "A_5 Drowning",
+            "A_6 Life jackets",
+            "A_7 Rescue breathing",
+            "A_8 Backyard pools"
         ]
     },
     {
@@ -77,14 +77,14 @@ myObjects.classes = [
             "Monkey crawl assisted, on edge, 5ft"
         ],
         topics: [
-            "B.1 Ask permission",
-            "B.2 Swim attire",
-            "B.3 Safe swim area",
-            "B.4 Life jackets",
-            "B.5 Reach or throw, don't go",
-            "B.6 Hypothermia",
-            "B.7 Choking",
-            "B.8 Beaches"
+            "B_1 Ask permission",
+            "B_2 Swim attire",
+            "B_3 Safe swim area",
+            "B_4 Life jackets",
+            "B_5 Reach or throw, don't go",
+            "B_6 Hypothermia",
+            "B_7 Choking",
+            "B_8 Beaches"
         ]
     },
     {
@@ -101,14 +101,14 @@ myObjects.classes = [
             "Swim, float, swim assisted, 10 ft"
         ],
         topics: [
-            "1.1 Building relationships",
-            "1.2 The Y's Core Values",
-            "1.3 Lifeguards",
-            "1.4 Benchmark skills",
-            "1.5 Supervision",
-            "1.6 Reach or throw, don't go",
-            "1.7 Life Jackets",
-            "1.8 Safe swim area"
+            "1_1 Building relationships",
+            "1_2 The Y's Core Values",
+            "1_3 Lifeguards",
+            "1_4 Benchmark skills",
+            "1_5 Supervision",
+            "1_6 Reach or throw, don't go",
+            "1_7 Life Jackets",
+            "1_8 Safe swim area"
         ]
     },
     {
@@ -126,14 +126,14 @@ myObjects.classes = [
             "Swim, float, swim 5 yd"
         ],
         topics: [
-            "2.1 Building relationships",
-            "2.2 The Y's Core Values",
-            "2.3 Find help",
-            "2.4 Benchmark skills",
-            "2.5 Supervision",
-            "2.6 Lifejackets",
-            "2.7 Reach or throw, don't go",
-            "2.8 Backyard pools"
+            "2_1 Building relationships",
+            "2_2 The Y's Core Values",
+            "2_3 Find help",
+            "2_4 Benchmark skills",
+            "2_5 Supervision",
+            "2_6 Lifejackets",
+            "2_7 Reach or throw, don't go",
+            "2_8 Backyard pools"
         ]
     },
     {
@@ -149,14 +149,14 @@ myObjects.classes = [
             "Swim, float, swim 25 yd (15 yd preschool)"
         ],
         topics: [
-            "3.1 Building relationships",
-            "3.2 The Y's Core Values",
-            "3.3 Sun safety",
-            "3.4 Benchmark skills",
-            "3.5 Lifejackets",
-            "3.6 Supervision",
-            "3.7 Call 911",
-            "3.8 Pool drains"
+            "3_1 Building relationships",
+            "3_2 The Y's Core Values",
+            "3_3 Sun safety",
+            "3_4 Benchmark skills",
+            "3_5 Lifejackets",
+            "3_6 Supervision",
+            "3_7 Call 911",
+            "3_8 Pool drains"
         ]
     },
     {
@@ -172,14 +172,14 @@ myObjects.classes = [
             "Butterfly kick, 15 yd"
         ],
         topics: [
-            "4.1 Weather",
-            "4.2 First aid",
-            "4.3 Hypoxic blackout",
-            "4.4 Open water",
-            "4.5 Goal setting",
-            "4.6 Heart rate",
-            "4.7 Nutrition ",
-            "4.8 Boating"
+            "4_1 Weather",
+            "4_2 First aid",
+            "4_3 Hypoxic blackout",
+            "4_4 Open water",
+            "4_5 Goal setting",
+            "4_6 Heart rate",
+            "4_7 Nutrition ",
+            "4_8 Boating"
         ]
     },
     {
@@ -195,14 +195,14 @@ myObjects.classes = [
             "Butterfly simultaneous arm action & kick, 15 yd"
         ],
         topics: [
-            "5.1 HELP technique",
-            "5.2 Shock",
-            "5.3 Hypoxic blackout",
-            "5.4 Huddle position",
-            "5.5 Goal setting",
-            "5.6 Abdominal thrusts",
-            "5.7 Rest & relaxation",
-            "5.8 Water parks"
+            "5_1 HELP technique",
+            "5_2 Shock",
+            "5_3 Hypoxic blackout",
+            "5_4 Huddle position",
+            "5_5 Goal setting",
+            "5_6 Abdominal thrusts",
+            "5_7 Rest & relaxation",
+            "5_8 Water parks"
         ]
     },
     {
@@ -218,14 +218,14 @@ myObjects.classes = [
             "Butterfly 25 yd"
         ],
         topics: [
-            "6.1 Hypothermia",
-            "6.2 Rescue breathing",
-            "6.3 Hypoxic blackout",
-            "6.4 Benchmark skills",
-            "6.5 Goal setting",
-            "6.6 CPR",
-            "6.7 Physical activity",
-            "6.8 Cramps"
+            "6_1 Hypothermia",
+            "6_2 Rescue breathing",
+            "6_3 Hypoxic blackout",
+            "6_4 Benchmark skills",
+            "6_5 Goal setting",
+            "6_6 CPR",
+            "6_7 Physical activity",
+            "6_8 Cramps"
         ]
     }
 ]
