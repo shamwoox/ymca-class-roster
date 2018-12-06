@@ -5,6 +5,16 @@
   	<div class="form">
     	<div class="row">
       	<div class="shadow-lg p-3 mb-5 bg-white rounded">
+			<% if(success && success.length > 0) { %>
+				<div class="alert alert-success" role="alert">
+					<%= success %>
+				</div>
+			<% } %>
+			<% if(error && error.length > 0) { %>
+				<div class="alert alert-danger" role="alert">
+					<%= error %>
+				</div>
+			<% } %>
 			<form action="/user/<%= user._id %>?_method=PUT" method="POST">
 				<h1 class="text-center">Edit Information</h1>
 				<hr>
@@ -18,6 +28,16 @@
 					<div class="form-group col-md-6">
 						<label for="phone">*Phone</label>
 						<input type="text" name="user[phone]" class="form-control" id="phone" value="<%= user.phone %>" required>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="password"> New Password </label>
+						<input name="password" type="password" class="form-control" id="password" placeholder="Password">
+					</div>
+					<div class="form-group col-md-6">
+						<label for="confirm_password"> Confirm New Password </label>
+						<input name="confirmPassword" type="password" class="form-control" id="confirm_password" placeholder="Password">
 					</div>
 				</div>
 				<hr>

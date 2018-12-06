@@ -30,7 +30,7 @@ router.get('/:id', middleware.isLoggedIn, function(req, res) {
 });
 
 //Get edit form for user information
-router.get('/:id/edit',function(req, res) {
+router.get('/:id/edit', middleware.isLoggedIn, function(req, res) {
     User.findById(req.params.id, function(err, foundUser) {
         if(err) {
             res.redirect('/');
@@ -51,10 +51,33 @@ router.put('/:id', function(req, res) {
     user.phone = myFunctions.formatPhoneNumber(user.phone);
     User.findByIdAndUpdate(req.params.id, user, function(err, updatedUser) {
         if(err) {
+            req.flash('error', 'An error has occured');
             res.redirect('/user/' + req.params.id +'/edit');
         } else {
-            req.flash('success', 'Successfully updated user profile!');
-            res.redirect('/user/' + req.params.id);
+            if(req.body.password.length > 0) {
+                User.findByUsername(updatedUser.username).then(function(sanitizedUser){
+                    if (sanitizedUser){
+                        if(req.body.password === req.body.confirmPassword) {
+                            sanitizedUser.setPassword(req.body.password, function(){
+                                sanitizedUser.save();
+                                req.flash('success', 'Successfully updated user profile!');
+                                res.redirect('/user/' + req.params.id);
+                            });
+                        } else {
+                            req.flash('error', 'Passwords do not match');
+                            res.redirect('/user/' + updatedUser._id + '/edit');
+                        }
+                    } else {
+                        req.flash('error', 'An error has occured');
+                        res.redirect('/user/' + req.params.id + '/edit');
+                    }
+                },function(err){
+                    console.error(err);
+                });
+            } else {
+                req.flash('success', 'Successfully updated user profile!');
+                res.redirect('/user/' + req.params.id);
+            }
         }
     });
 });
