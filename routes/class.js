@@ -14,8 +14,13 @@ const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWI
 //Show new class form
 router.get('/new', middleware.isLoggedIn, function(req, res) {
     User.find({sessions: {_id: req.params.id}}, function(err, foundInstructors) {
-        res.render('class/new', {sessionId: req.params.id, classes: myObjects.classes,
-                                instructors: foundInstructors, dayOfWeek: myObjects.days});
+        if(req.user.isAdmin) {
+            res.render('class/new', {sessionId: req.params.id, classes: myObjects.classes,
+                instructors: foundInstructors, dayOfWeek: myObjects.days});
+        } else {
+            req.flash('error', "You don't have permission to add new classes!");
+            res.redirect('/session/' + req.params.id);
+        }
     });
 });
 
@@ -49,8 +54,6 @@ router.post('/new', function(req, res) {
                         Session.update({_id: req.params.id}, {$push: {classes: createdClass}}, function(err, pushedClass) {
                             if(err) {
                                 console.log(err);
-                            } else {
-                                console.log(pushedClass);
                             }
                         });
                         User.update({_id: req.body.instructorId}, {$push: {classes: createdClass}}, function(err, pushedClass) {
@@ -126,5 +129,103 @@ router.post('/:class_id/student', middleware.isLoggedIn, function(req, res) {
     });
 });
 
+//Get class edit form
+router.get('/:class_id/edit', middleware.isLoggedIn,function(req, res) {
+    Class.findById(req.params.class_id, function(err, foundClass) {
+        if(err) {
+            console.log(err);
+        } else {
+            if(req.user.isAdmin) {
+                console.log(req.params.id);
+                User.find({'sessions._id': req.params.id}, function(err, foundInstructors) {
+                    res.render('class/edit', {sessionId: req.params.id, classes: myObjects.classes,
+                                            instructors: foundInstructors, dayOfWeek: myObjects.days,
+                                        foundClass: foundClass});
+                });
+            } else {
+                req.flash('error', "You don't have permission to edit classes!");
+                res.redirect('/session/' + req.params.id + '/class/' + req.params.class_id);
+            }
+        }
+    });
+});
+
+//Update class
+router.put('/:class_id', function(req, res) {
+    if(req.user.isAdmin) {
+        User.findById(req.body.instructorId, function(err, foundInstructor) {
+            Session.findById(req.params.id, function(err, foundSession) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    var newClassProp = {
+                        levelName: req.body.levelName,
+                        startTime: req.body.startTime,
+                        endTime: req.body.endTime,
+                        dayOfWeek: req.body.dayOfWeek,
+                        instructor: {
+                            firstName: foundInstructor.firstName,
+                            lastName: foundInstructor.lastName
+                        }
+                    }
+                    newClassProp.instructor.id = foundInstructor;
+                    newClassProp.session = {};
+                    newClassProp.session.id = foundSession;
+                    newClassProp.session.season = foundSession.season;
+                    newClassProp.session.year = foundSession.year;
+                    Class.findByIdAndUpdate(req.params.class_id, newClassProp, function(err, updatedClass) {
+                       if(err) {
+                           console.log(err);
+                       } else {
+                           req.flash('success', 'Successfully updated class!');
+                           res.redirect('/session/' + req.params.id + '/class/' + req.params.class_id);
+                       }
+                    });
+                }
+            });
+        });
+    } else {
+        req.flash('error', "You don't have permission to update classes!");
+        res.redirect('/session/' + req.params.id + '/class/' + req.params.class_id);
+    }
+});
+
+//Destroy class
+router.delete('/:class_id', function(req, res) {
+    if(req.user.isAdmin) {
+        Session.update({classes: req.params.class_id}, {$pull: {classes: req.params.class_id}}, function(err, updatedUser) {
+            if(err) {
+                console.log(err);
+            }
+        });
+    
+        User.update({'classes._id': req.params.class_id}, {$pull: {classes: {_id: req.params.class_id}}}, function(err, updatedUser) {
+            if(err) {
+                console.log(err);
+            }
+        });
+    
+        Student.update({'classes._id': req.params.class_id}, {$pull: {classes: {_id: req.params.class_id}}}, function(err, updatedStudent) {
+            if(err) {
+                console.log(err);
+            }
+        });
+    
+        Class.findByIdAndRemove(req.params.class_id, function(err, deletedClass) {
+            if(err) {
+                console.log(err);
+                req.flash('error', 'An error has occured');
+                res.redirect('/session/' + req.params.id + '/class/' + req.params.class_id);
+            } else {
+                console.log(req.params.id);
+                req.flash('success', 'Successfully deleted class!');
+                res.redirect('/session/' + req.params.id);
+            }
+        });
+    } else {
+        req.flash('error', "You don't have permission to delete classes!");
+        res.redirect('/session/' + req.params.id + '/class/' + req.params.class_id);
+    }
+});
 
 module.exports = router;

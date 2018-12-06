@@ -11,6 +11,7 @@
             <%= error %>
         </div>
     <% } %>
+    <a href="/students/<%=foundStudent._id%>"><i class="fas fa-arrow-circle-left"></i> Back</a>
     <h2>Edit Skills Checklist</h2>
     
     <form action="/students/<%= foundStudent._id %>/editskills?_method=PUT" method="POST">
@@ -99,8 +100,8 @@
         <% } %>
         <hr>
         <div class="float-right" style="margin-bottom: 5%;">
-            <button class="btn btn-primary btn-sm" type="submit">Save</button>
-            <a class="btn btn-danger btn-sm" href="/students/<%= foundStudent._id %>">Cancel</a>
+            <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-check"></i> Save</button>
+            <a class="btn btn-danger btn-sm" href="/students/<%= foundStudent._id %>"><i class="fas fa-ban"></i> Cancel</a>
         </div>
     </form>
 </div>

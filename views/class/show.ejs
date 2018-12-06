@@ -22,6 +22,15 @@
   <h6>
     <%= foundClass.dayOfWeek %> <%= foundClass.startTime %> - <%= foundClass.endTime %>
   </h6>
+  <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
+  <a href="/session/<%=foundClass.session.id%>/class/<%=foundClass._id%>/edit" class="btn btn-warning btn-sm" style="margin-bottom: 5px;">
+    <i class="far fa-edit"></i> 
+    Edit
+  </a>
+  <form action="/session/<%=foundClass.session.id%>/class/<%=foundClass._id%>?_method=DELETE" method="POST">
+    <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Delete</button>
+  </form>
+<% } %>
   <hr>
 
 <div class="row">
@@ -79,6 +88,4 @@
       </div>
     </div>
   </div>
-</div>
-
 <% include ../partials/footer %>

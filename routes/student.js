@@ -133,35 +133,45 @@ router.put('/:id/editskills', middleware.isLoggedIn,function(req, res) {
 
 //UPDATE student
 router.put('/:id', function(req, res) {
-    var student = req.body.student;
-    Student.findByIdAndUpdate(req.params.id, student, function(err, updatedStudent) {
-        if(err) {
-            res.redirect('/students/' + req.params.id +'/edit');
-        } else {
-            req.flash('success', 'Successfully updated student profile!');
-            res.redirect('/students/' + req.params.id);
-        }
-    });
+    if(req.user.isAdmin) {
+        var student = req.body.student;
+        Student.findByIdAndUpdate(req.params.id, student, function(err, updatedStudent) {
+            if(err) {
+                res.redirect('/students/' + req.params.id +'/edit');
+            } else {
+                req.flash('success', 'Successfully updated student profile!');
+                res.redirect('/students/' + req.params.id);
+            }
+        });
+    } else {
+        req.flash('error', "You don't have permission to update students!");
+        res.redirect('/students/' + req.params.id);
+    }
 });
 
 //Destroy student
 router.delete('/:id', function(req, res) {
-    Class.updateMany({'students._id': req.params.id}, {$pull: {students: {_id: req.params.id}}}, function(err, updatedClasses) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log(updatedClasses);
-        }
-    });
-    Student.findByIdAndRemove(req.params.id, function(err) {
-        if(err) {
-            res.redirect('/students');
-        } else {
-            req.flash('success', 'Student successfully deleted!');
-            res.redirect('/students');
-        }
-    });
-    Class.update()
+    if(req.user.isAdmin) {
+        Class.updateMany({'students._id': req.params.id}, {$pull: {students: {_id: req.params.id}}}, function(err, updatedClasses) {
+            if(err) {
+                console.log(err);
+            } else {
+                console.log(updatedClasses);
+            }
+        });
+        Student.findByIdAndRemove(req.params.id, function(err) {
+            if(err) {
+                res.redirect('/students');
+            } else {
+                req.flash('success', 'Student successfully deleted!');
+                res.redirect('/students');
+            }
+        });
+        Class.update()
+    } else {
+        req.flash('error', "You don't have permission to delete students!");
+        res.redirect('/students/' + req.params.id);
+    }
 });
 
 module.exports = router;
