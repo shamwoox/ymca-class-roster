@@ -62,65 +62,65 @@
                     <tr>
                         <th scope="row"><%= skill %></th>
                         <% for(var i = 0; i < foundClass.students.length; i++) { %>
-                            <% var key = foundClass.students[i]._id + '.' + skill %>
+                            <% var key = foundClass.students[i]._id + '_' + skill %>
                             
                             <% if(day.skills[key] === '-1') { %>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio1" value="-1" required checked>
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio1" value="-1" required checked>
                                         <label class="form-check-label" for="inlineRadio1">✗</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio2" value="0">
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio2" value="0">
                                         <label class="form-check-label" for="inlineRadio2">≈</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio3" value="1">
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio3" value="1">
                                         <label class="form-check-label" for="inlineRadio3">✓</label>
                                     </div>
                                 </td>
                             <% } else if(day.skills[key] === '0') { %>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio1" value="-1" required>
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio1" value="-1" required>
                                         <label class="form-check-label" for="inlineRadio1">✗</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio2" value="0" checked>
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio2" value="0" checked>
                                         <label class="form-check-label" for="inlineRadio2">≈</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio3" value="1">
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio3" value="1">
                                         <label class="form-check-label" for="inlineRadio3">✓</label>
                                     </div>
                                 </td>
                             <% } else if(day.skills[key] === '1') { %>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio1" value="-1" required>
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio1" value="-1" required>
                                         <label class="form-check-label" for="inlineRadio1">✗</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio2" value="0">
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio2" value="0">
                                         <label class="form-check-label" for="inlineRadio2">≈</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio3" value="1" checked>
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio3" value="1" checked>
                                         <label class="form-check-label" for="inlineRadio3">✓</label>
                                     </div>
                                 </td>
                             <% } else { %>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio1" value="-1" required checked>
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio1" value="-1" required checked>
                                         <label class="form-check-label" for="inlineRadio1">✗</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio2" value="0">
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio2" value="0">
                                         <label class="form-check-label" for="inlineRadio2">≈</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>.<%=skill%>]" id="inlineRadio3" value="1">
+                                        <input class="form-check-input" type="radio" name="skills[<%=foundClass.students[i]._id%>_<%=skill%>]" id="inlineRadio3" value="1">
                                         <label class="form-check-label" for="inlineRadio3">✓</label>
                                     </div>
                                 </td>
@@ -144,65 +144,65 @@
                         <tr>
                             <th scope="row"><%= topic %></th>
                             <% for(var i = 0; i < foundClass.students.length; i++) { %>
-                                <% var keyTopic = foundClass.students[i]._id + '.' + topic %>
+                                <% var keyTopic = foundClass.students[i]._id + '_' + topic %>
                                 
                                 <% if(day.topics[keyTopic] === '-1') { %>
                                     <td>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required checked>
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio1" value="-1" required checked>
                                             <label class="form-check-label" for="inlineRadio1">✗</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio2" value="0">
                                             <label class="form-check-label" for="inlineRadio2">≈</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio3" value="1">
                                             <label class="form-check-label" for="inlineRadio3">✓</label>
                                         </div>
                                     </td>
                                 <% } else if(day.topics[keyTopic] === '0') { %>
                                     <td>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required>
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio1" value="-1" required>
                                             <label class="form-check-label" for="inlineRadio1">✗</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0" checked>
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio2" value="0" checked>
                                             <label class="form-check-label" for="inlineRadio2">≈</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio3" value="1">
                                             <label class="form-check-label" for="inlineRadio3">✓</label>
                                         </div>
                                     </td>
                                 <% } else if(day.topics[keyTopic] === '1') { %>
                                     <td>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required>
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio1" value="-1" required>
                                             <label class="form-check-label" for="inlineRadio1">✗</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio2" value="0">
                                             <label class="form-check-label" for="inlineRadio2">≈</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1" checked>
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio3" value="1" checked>
                                             <label class="form-check-label" for="inlineRadio3">✓</label>
                                         </div>
                                     </td>
                                 <% } else { %>
                                     <td>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio1" value="-1" required checked>
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio1" value="-1" required checked>
                                             <label class="form-check-label" for="inlineRadio1">✗</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio2" value="0">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio2" value="0">
                                             <label class="form-check-label" for="inlineRadio2">≈</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>.<%=topic%>]" id="inlineRadio3" value="1">
+                                            <input class="form-check-input" type="radio" name="topics[<%=foundClass.students[i]._id%>_<%=topic%>]" id="inlineRadio3" value="1">
                                             <label class="form-check-label" for="inlineRadio3">✓</label>
                                         </div>
                                     </td>

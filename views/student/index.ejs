@@ -14,24 +14,46 @@
 	<p>Type student name:</p>
 
 	<div class="input-group">
-		<input type="text" class="form-control" id="myInput" onkeyup="myFunction()">
+		<input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 		<div class="input-group-append">
 			<span class="input-group-text"><i class="fas fa-search"></i></span>
 		</div>
 		<% if(currentUser && currentUser.isAdmin) { %>
-		<a href="/students/new" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></a>
+				<a href="/students/new" class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></a>
 		<% } %>
 	</div>
 	
 	<br>
 	<ul class="list-group" id="students">
 		<% students.forEach(function(student) { %>
-			<a href="/students/<%= student._id %>">
-				<li class="list-group-item"><%= student.firstName %> <%= student.lastName %></li>
-			</a>
+			<li class="list-group-item">
+				<a href="/students/<%= student._id %>">
+					<%= student.firstName %> <%= student.lastName %>
+				</a>
+			</li>					
 		<% }) %>
 	</ul>
 </div>
 
-
+<script>
+	function myFunction() {
+		// Declare variables
+		var input, filter, ul, li, a, i, txtValue;
+		input = document.getElementById('myInput');
+		filter = input.value.toUpperCase();
+		ul = document.getElementById("students");
+		li = ul.getElementsByTagName('li');
+	
+		// Loop through all list items, and hide those who don't match the search query
+		for (i = 0; i < li.length; i++) {
+			a = li[i].getElementsByTagName("a")[0];
+			txtValue = a.textContent || a.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				li[i].style.display = "";
+			} else {
+				li[i].style.display = "none";
+			}
+		}
+	}
+</script>
 <% include ../partials/footer %>
