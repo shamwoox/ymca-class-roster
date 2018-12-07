@@ -22,7 +22,7 @@
   <h6>
     <%= foundClass.dayOfWeek %> <%= foundClass.startTime %> - <%= foundClass.endTime %>
   </h6>
-  <% if(currentUser && currentUser._id.equals(foundClass.instructor.id) || currentUser && currentUser.isAdmin) { %>
+  <% if(currentUser && currentUser.isAdmin) { %>
   <a href="/session/<%=foundClass.session.id%>/class/<%=foundClass._id%>/edit" class="btn btn-warning btn-sm" style="margin-bottom: 5px;">
     <i class="far fa-edit"></i> 
     Edit

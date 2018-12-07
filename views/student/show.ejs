@@ -80,7 +80,7 @@
 				<ul class="list-group list-group-flush">
 					<% for(keys in student.skills) { %>
 						<% if(student.skills[keys] === '0') { %>
-							<li class="list-group-item"><%= keys.substring(25, keys.length - 1) %></li>
+							<li class="list-group-item"><%= keys.substring(25, keys.length) %></li>
 						<% } %>
 					<% } %>
 				</ul>
